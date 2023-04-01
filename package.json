@@ -1,19 +1,28 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@volar/vue-language-plugin-pug": "^1.2.0",
-    "nuxt": "^3.3.2",
-    "pug": "^3.0.2",
-    "pug-plain-loader": "^1.1.0",
-    "sass": "^1.60.0",
-    "sass-loader": "^10.4.1"
-  }
+    "name": "nuxt-app",
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.21.3",
+        "@nuxtjs/eslint-config": "^12.0.0",
+        "@nuxtjs/eslint-module": "^4.0.2",
+        "@volar/vue-language-plugin-pug": "latest",
+        "eslint": "^8.37.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-nuxt": "^4.0.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-vue": "^9.10.0",
+        "nuxt": "^3.3.2",
+        "prettier": "^2.8.7",
+        "pug": "^3.0.2",
+        "pug-plain-loader": "^1.1.0",
+        "sass": "^1.60.0",
+        "sass-loader": "^10.4.1"
+    }
 }
