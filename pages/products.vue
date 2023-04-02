@@ -3,13 +3,11 @@ section
     .container
         h1 products
 </template>
-    
-    <script lang="ts">
-import { defineComponent } from "vue";
+
+<script lang="ts">
+import { defineComponent } from 'vue';
 export default defineComponent({
-    name: "products",
+    name: 'products',
 });
 </script>
-    
-    <style scoped lang="scss">
-</style>
+<style lang="scss" scoped></style>

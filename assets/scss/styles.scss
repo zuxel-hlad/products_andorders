@@ -1,38 +1,50 @@
 @import './_reset.scss';
 @import './_variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css');
 
 body {
-	font-size: 100%;
-	font-family: 'Roboto', sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	background-color: $main-bg;
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: $main-bg;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: all 0.25s;
+    transition: all 0.25s;
 }
 .fade-enter-from,
 .fade-leave-to {
-	opacity: 0;
-	// filter: blur(1rem);
-	transform: translateX(20px);
+    opacity: 0;
+    // filter: blur(1rem);
+    transform: translateX(20px);
 }
 
 section {
-	flex: 1 1 calc(100% - 197px);
-	padding: 150px 125px 75px 125px;
-	min-height: 100vh;
-	height: calc(100 * var(--vh-menu) - 12px);
-	overflow-y: auto;
-	font-size: 70px;
+    flex: 1 1 calc(100% - 197px);
+    padding: 150px 125px 75px 125px;
+    min-height: 100vh;
+    height: calc(100 * var(--vh-menu) - 12px);
+    overflow-y: auto;
+    font-size: 70px;
 }
 
 .container {
-	width: 100%;
-	padding: 0 12px;
-	max-width: 1550px;
-	margin: 0 auto;
+    width: 100%;
+    padding: 0 12px;
+    max-width: 1550px;
+    margin: 0 auto;
+}
+
+.wrap-text {
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.img-full img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

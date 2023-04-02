@@ -1,6 +1,6 @@
 <template lang="pug">
 section
-    .container
+    .container(class="test")
         h1 groups
 </template>
 
@@ -11,5 +11,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

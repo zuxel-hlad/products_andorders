@@ -3,13 +3,11 @@ section
     .container
         h1 users
 </template>
-        
-        <script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
 export default defineComponent({
-    name: "users",
+    name: 'users',
 });
 </script>
-        
-        <style scoped lang="scss">
-</style>
+
+<style scoped lang="scss"></style>

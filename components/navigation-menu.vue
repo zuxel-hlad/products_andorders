@@ -1,7 +1,7 @@
 <template lang="pug">
 aside.navigation-menu
     nuxt-link.navigation-menu__link(v-for='{ to, name, id } in links', :key='id', :to='to')
-        span.navigation-menu__link-text {{ name }}
+        span.navigation-menu__link-text.wrap-text {{ name }}
 </template>
 
 <script lang="ts">
@@ -64,7 +64,6 @@ export default defineComponent({
 
         &-text {
             display: block;
-            max-width: 100%;
             font-size: 16px;
             line-height: 120%;
             font-weight: 700;
@@ -74,8 +73,6 @@ export default defineComponent({
             border-bottom: 3px solid transparent;
             transition: border-color 0.25s;
             padding-bottom: 2px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
         }
         &.router-link-exact-active span {
             border-color: $main-green-color;

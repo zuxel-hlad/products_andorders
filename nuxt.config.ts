@@ -1,9 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
-        head: {
-            title: 'dZENcode Test Task',
-        },
         pageTransition: {
             name: 'fade',
             mode: 'out-in',

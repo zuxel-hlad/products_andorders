@@ -6,8 +6,8 @@ section
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-export default defineComponent({});
+export default defineComponent({
+    name: 'home',
+});
 </script>
-
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
