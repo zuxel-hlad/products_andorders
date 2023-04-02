@@ -124,7 +124,7 @@ export default defineComponent({
             border: 1px solid #bac2cc;
             box-shadow: 0px 1px 1px 0px $product-serial-color inset;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 8px;
             outline-color: transparent;
             font-weight: 600;
 
