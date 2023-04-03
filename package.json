@@ -27,5 +27,18 @@
         "pug-plain-loader": "^1.1.0",
         "sass": "^1.60.0",
         "sass-loader": "^10.4.1"
+    },
+    "dependencies": {
+        "@babel/plugin-transform-flow-strip-types": "^7.21.0",
+        "@babel/preset-env": "^7.21.4",
+        "@pinia/nuxt": "^0.4.7",
+        "pinia": "^2.0.33",
+        "vuex": "^4.0.2"
+    },
+    "overrides": {
+        "vue": "latest"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser"
     }
 }

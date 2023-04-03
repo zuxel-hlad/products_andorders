@@ -1,8 +1,16 @@
 <template lang="pug">
-.modal
+.modal(
+    :class="{'modal_active': visibility}")
     .modal-content(@click.stop)
-        button.modal-content__close.img-full(type="button")
-            img(src="../assets/svg/close.svg" alt="close modal" title="close modal")
+        button.modal-content__close.img-full(
+            type="button" 
+            @click="$emit('close-modal')"
+            )
+            img(
+                src="../assets/svg/close.svg" 
+                alt="close modal" 
+                title="close modal"
+            )
         h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей прихід ?
         .modal-content__product
             .modal-content__product-status 
@@ -12,8 +20,14 @@
                 span.modal-content__product-text.wrap-text Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3
                 span.modal-content__product-text.modal-content__product-text_serial.wrap-text SN-12.3456789
         .modal-content__buttons
-            button.modal-content__buttons-btn(type="button") Скасувати
-            button.modal-content__buttons-btn.modal-content__buttons-btn_delete(type="button")
+            button.modal-content__buttons-btn(
+                type="button"
+                @click="$emit('cancel')"
+                ) Скасувати
+            button.modal-content__buttons-btn.modal-content__buttons-btn_delete(
+                type="button"
+                @click="$emit('delete')"
+                )
                 i.fa-regular.fa-trash-can &nbsp;
                 | Видалити
                 
@@ -24,6 +38,13 @@
 import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'app-modal',
+    props: {
+        visibility: {
+            type: Boolean,
+            default: false,
+            required: true,
+        },
+    },
 });
 </script>
 
@@ -39,7 +60,14 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease-in-out;
+
+    &_active {
+        opacity: 1;
+        visibility: visible;
+    }
 
     &-content {
         position: relative;

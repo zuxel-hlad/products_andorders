@@ -6,7 +6,7 @@ module.exports = {
     },
     parserOptions: {
         parser: '@babel/eslint-parser',
-        requireConfigFile: false,
+        requireConfigFile: true,
     },
     extends: ['@nuxtjs', '@nuxtjs/eslint-config-typescript', 'plugin:nuxt/recommended', 'plugin:prettier/recommended'],
     plugins: ['prettier'],
@@ -21,6 +21,7 @@ module.exports = {
                 allowModifiers: true,
             },
         ],
+        semi: ['error', 'last'],
     },
     globals: {
         _: true,

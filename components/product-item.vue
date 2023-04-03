@@ -23,7 +23,10 @@
     .product-item__coming-date 
         span.date-short 06 / 12
         span.date-full 06 / 12 / 2017
-    button.product-item__delete(type="button")
+    button.product-item__delete(
+        type="button"
+        @click="$emit('delete-product')"
+        )
         i.fa-regular.fa-trash-can
 </template>
 
@@ -32,6 +35,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'product-item',
+    emits: ['delete-product'],
 });
 </script>
 
@@ -39,9 +43,10 @@ export default defineComponent({
 .product-item {
     width: 100%;
     display: grid;
+    position: relative;
     grid-template-columns:
         10px 42px 475px 255px 50px
-        123px 380px 263px 374px 115px 16px;
+        123px 380px 263px 374px 115px 25px;
     grid-template-rows: 1fr;
     grid-auto-rows: 1fr;
     justify-content: space-between;
@@ -187,6 +192,7 @@ export default defineComponent({
     }
 
     &__delete {
+        padding: 5px;
         border: none;
         background: transparent;
         display: flex;
