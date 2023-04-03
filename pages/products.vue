@@ -1,7 +1,7 @@
 <template lang="pug">
 section
     .container
-        h1 products
+        h1.main-title products
 </template>
 
 <script lang="ts">

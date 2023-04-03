@@ -1,7 +1,7 @@
 <template lang="pug">
 section
     .container
-        h1 settings page
+        h1.main-title settings page
         nuxt-link(to="/") Main page
 </template>
 

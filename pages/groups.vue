@@ -1,7 +1,7 @@
 <template lang="pug">
 section
     .container(class="test")
-        h1 groups
+        h1.main-title groups
 </template>
 
 <script lang="ts">

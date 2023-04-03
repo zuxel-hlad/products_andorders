@@ -1,5 +1,9 @@
 <template lang="pug">
 aside.navigation-menu
+    .navigation-menu__user.img-full
+        img(src="https://i.pravatar.cc/100" alt="user")
+        button.navigation-menu__user-profile(type="button")
+            i.fa-sharp.fa-solid.fa-gear
     nuxt-link.navigation-menu__link(v-for='{ to, name, id } in links', :key='id', :to='to')
         span.navigation-menu__link-text.wrap-text {{ name }}
 </template>
@@ -44,16 +48,58 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .navigation-menu {
-    padding: 0 12px;
+    padding: 122px 12px 12px;
     width: 197px;
     min-height: 100vh;
     height: calc(100 * var(--vh-menu));
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: $white;
     box-shadow: 3px 0px 40px 0px $product-serial-color;
+
+    &__user {
+        position: relative;
+        margin: 0 auto 64px;
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            clip-path: circle(50%);
+        }
+
+        &-profile {
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            background-color: $white;
+            border: none;
+            padding: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $product-date-color;
+            box-shadow: 3px 3px 15px 0px $product-serial-color;
+            font-size: 16px;
+            cursor: pointer;
+
+            i {
+                transition: transform 0.7s ease;
+            }
+
+            &:hover i {
+                transform: rotate(360deg);
+            }
+        }
+    }
 
     &__link {
         max-width: 100%;
