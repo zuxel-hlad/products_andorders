@@ -51,6 +51,14 @@ export default defineComponent({
     border: 1px solid $light-gray;
     border-radius: 6px;
     padding: 10px 23px 10px 36px;
+    transition: box-shadow 0.25s ease;
+    cursor: pointer;
+
+    @media (any-hover: hover) {
+        &:hover {
+            box-shadow: 7px 7px 11px 0px $product-serial-color;
+        }
+    }
 
     &__available {
         width: 10px;

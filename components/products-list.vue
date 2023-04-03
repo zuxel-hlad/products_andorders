@@ -3,14 +3,16 @@
     product-item
     product-item
     product-item
+    coming-item
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import productItem from '~/components/product-item.vue';
+import comingItem from '~/components/coming-item.vue';
 export default defineComponent({
     name: 'products-list',
-    components: { productItem },
+    components: { productItem, comingItem },
 });
 </script>
 
