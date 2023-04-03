@@ -11,14 +11,14 @@
                 alt="close modal" 
                 title="close modal"
             )
-        h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей прихід ?
+        h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей {{titleType}}?
         .modal-content__product
             .modal-content__product-status 
             .modal-content__product-img.img-full
                 img(src="../assets/img/moc_product.png" alt="product name")
             .modal-content__product-descr
-                span.modal-content__product-text.wrap-text Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3
-                span.modal-content__product-text.modal-content__product-text_serial.wrap-text SN-12.3456789
+                span.modal-content__product-text.wrap-text {{ deletedItem?.title }}
+                span.modal-content__product-text.modal-content__product-text_serial.wrap-text {{ deletedItem?.serialNumber }}
         .modal-content__buttons
             button.modal-content__buttons-btn(
                 type="button"
@@ -36,13 +36,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { DeletedProduct } from '~~/store/store-types';
+
 export default defineComponent({
     name: 'app-modal',
     props: {
         visibility: {
-            type: Boolean,
-            default: false,
+            type: Boolean as () => boolean,
+            default: false as false,
+            required: true as true,
+        },
+        titleType: {
+            type: String,
             required: true,
+            default: '',
+        },
+        deletedItem: {
+            type: Object as () => DeletedProduct | null,
+            required: true as true,
+            default: () => {},
         },
     },
 });

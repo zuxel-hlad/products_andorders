@@ -6,7 +6,7 @@ export interface Price {
 
 export interface Product {
     id: number;
-    serialNumber: number;
+    serialNumber: number | string;
     isNew: number;
     photo: string;
     title: string;
@@ -26,5 +26,11 @@ export interface Order {
     title: string;
     date: string;
     description: string;
-    readonly products: Product[];
+    products: Product[];
+}
+
+export interface DeletedProduct {
+    title: string;
+    id: string | number;
+    serialNumber: number | string;
 }

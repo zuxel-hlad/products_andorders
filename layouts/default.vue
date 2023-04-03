@@ -4,9 +4,12 @@ main.main
     navigation-menu
     slot
 app-modal(
+    titleType="продукт"
     :visibility="modal"
-    @close-modal="toggleModal(false)"
-    @cancel="toggleModal(false)"
+    :deletedItem="deletedProduct"
+    @close-modal="closeModal"
+    @cancel="closeModal"
+    @delete="deleteProduct(deletedProduct)"
     )
 </template>
 
@@ -14,6 +17,7 @@ app-modal(
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
 import { useStore } from '~/store';
+import { useProductsStore } from '~/store/products';
 import appHeader from '~/components/app-header.vue';
 import navigationMenu from '~~/components/navigation-menu.vue';
 import appModal from '~/components/app-modal.vue';
@@ -25,10 +29,11 @@ export default defineComponent({
         appModal,
     },
     computed: {
-        ...mapState(useStore, ['modal']),
+        ...mapState(useStore, ['modal', 'deletedProduct']),
     },
     methods: {
-        ...mapActions(useStore, ['toggleModal']),
+        ...mapActions(useStore, ['closeModal']),
+        ...mapActions(useProductsStore, ['deleteProduct']),
     },
 });
 </script>

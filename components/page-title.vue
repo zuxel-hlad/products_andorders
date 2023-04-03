@@ -9,19 +9,19 @@ export default defineComponent({
     name: 'page-title',
     props: {
         titleText: {
-            type: String,
-            requierd: true,
-            default: '',
+            type: String as () => string,
+            requierd: true as true,
+            default: '' as '',
         },
         withButton: {
-            type: Boolean,
-            requierd: false,
-            default: false,
+            type: Boolean as () => boolean,
+            requierd: false as false,
+            default: false as false,
         },
         counter: {
-            type: String || Number,
-            requierd: true,
-            default: 0,
+            type: Number as () => number,
+            requierd: true as true,
+            default: 0 as 0,
         },
     },
 });

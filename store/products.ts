@@ -1,18 +1,30 @@
 import { defineStore } from 'pinia';
-import { Order, Product } from './store-types';
+import { useStore } from './index';
+import { Product } from './store-types';
+import { DeletedProduct } from './store-types';
 import mockData from './mock-data';
 
 interface RootState {
-    products: {
-        orders: Order[];
-        products: Product[];
-    };
+    products: Product[];
 }
 
-export const useStore = defineStore('products', {
+const { closeModal } = useStore();
+
+export const useProductsStore = defineStore('products', {
     state: (): RootState => {
         return {
-            products: mockData,
+            products: mockData.products,
         };
+    },
+
+    actions: {
+        deleteProduct(product: DeletedProduct | null): void {
+            if (product) {
+                this.products = this.products.filter((item) => item.id !== product.id);
+                closeModal();
+            } else {
+                return;
+            }
+        },
     },
 });

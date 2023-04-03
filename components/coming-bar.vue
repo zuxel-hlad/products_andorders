@@ -1,6 +1,8 @@
 <template lang="pug">
 .coming-bar
-    pageTitle(titleText="Продукти" counter="25")
+    pageTitle(
+        :titleText="titleText" 
+        :counter="count")
     label.coming-bar__select
         span.coming-bar__select-label Тип:
         select.coming-bar__select-select(name="product-type")
@@ -13,8 +15,27 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import pageTitle from '~/components/page-title.vue';
+type Options = string[];
+
 export default defineComponent({
     name: 'coming-bar',
+    props: {
+        titleText: {
+            type: String,
+            default: '',
+            required: true,
+        },
+        count: {
+            type: Number,
+            default: 0,
+            required: true,
+        },
+        filterOptions: {
+            type: Array as () => Options,
+            default: () => [],
+            requiered: true,
+        },
+    },
     components: { pageTitle },
 });
 </script>

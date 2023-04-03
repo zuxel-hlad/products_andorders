@@ -2,10 +2,13 @@
 .product-item
     .product-item__available
     .product-item__img.img-full
-        img(src="../assets/img/moc_product.png" alt="product name")
+        img(
+            src="~/assets/img/moc_product.png" 
+            alt="product name"
+            )
     .product-item__descr
-        span.product-item__descr-text.wrap-text Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3
-        span.product-item__descr-text.product-item__descr-text_serial.wrap-text SN-12.3456789
+        span.product-item__descr-text.wrap-text {{ product.title ? product.title : '-' }}
+        span.product-item__descr-text.product-item__descr-text_serial.wrap-text {{ product.serialNumber ? product.serialNumber : '-' }}
     .product-item__status
         span.product-item__status-status У ремонті
         .product-item__status-dates
@@ -32,10 +35,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Product } from '~~/store/store-types';
 
 export default defineComponent({
     name: 'product-item',
     emits: ['delete-product'],
+    props: {
+        product: {
+            type: Object as () => Product,
+            required: true,
+            default: () => {},
+        },
+    },
 });
 </script>
 
