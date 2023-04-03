@@ -4,6 +4,7 @@ aside.navigation-menu
         img(src="https://i.pravatar.cc/100" alt="user")
         button.navigation-menu__user-profile(type="button")
             i.fa-sharp.fa-solid.fa-gear
+            //- i.fa-solid.fa-list-ul
     nuxt-link.navigation-menu__link(v-for='{ to, name, id } in links', :key='id', :to='to')
         span.navigation-menu__link-text.wrap-text {{ name }}
 </template>
@@ -58,6 +59,7 @@ export default defineComponent({
     align-items: center;
     background-color: $white;
     box-shadow: 3px 0px 40px 0px $product-serial-color;
+    overflow-y: auto;
 
     &__user {
         position: relative;
