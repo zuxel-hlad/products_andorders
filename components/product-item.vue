@@ -61,7 +61,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .product-item {
-    width: 100%;
+    min-width: 2542px;
     display: grid;
     position: relative;
     grid-template-columns:

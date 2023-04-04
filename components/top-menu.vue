@@ -10,7 +10,9 @@
         .top-menu__info-date
             span.top-menu__info-text {{ today }}
             span.top-menu__info-text {{ todayDate }}
-        .top-menu__info-clock
+        .top-menu__info-clock(
+            :title="`Зараз: ${time}`"
+            )
             span.top-menu__info-text
                 .clock-icon.img-full
                     img(
@@ -18,11 +20,15 @@
                         alt="clock icon"
                     )
                 | {{ time }}
-            span.top-menu__info-text Користувачів: 12
+            span.top-menu__info-text(title="Користувачів у системі")
+                i.fa-sharp.fa-solid.fa-users
+                |&nbsp;&nbsp; {{ activeSessions }}
 </template>
 
 <script lang="ts">
+import { mapState } from 'pinia';
 import { defineComponent } from 'vue';
+import { useStore } from '~/store';
 
 export default defineComponent({
     name: 'top-menu',
@@ -32,6 +38,7 @@ export default defineComponent({
         };
     },
     computed: {
+        ...mapState(useStore, ['activeSessions']),
         today() {
             const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'];
             const date = new Date();

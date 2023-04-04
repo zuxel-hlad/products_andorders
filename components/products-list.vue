@@ -38,7 +38,9 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .products-list {
-    width: 2606px;
+    max-width: 1440px;
+    padding-bottom: 21px;
+    overflow: auto;
 
     &::v-deep(> div) {
         display: flex;
