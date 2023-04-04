@@ -1,6 +1,6 @@
 <template lang="pug">
 section
-    | прихід
+    h1.main-title Скоро...
 </template>
 
 <script lang="ts">

@@ -40,7 +40,7 @@ export default defineComponent({
 .products-list {
     width: 2606px;
 
-    &::v-deep(div[name='list']) {
+    &::v-deep(> div) {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;

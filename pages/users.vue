@@ -1,7 +1,6 @@
 <template lang="pug">
 section
-    .container
-        h1.main-title users
+    h1.main-title Скоро...
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';

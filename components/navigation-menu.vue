@@ -1,8 +1,14 @@
 <template lang="pug">
 aside.navigation-menu
     .navigation-menu__user.img-full
-        img(src="https://i.pravatar.cc/100" alt="user")
-        button.navigation-menu__user-profile(type="button")
+        img(
+            src="https://i.pravatar.cc/100" 
+            alt="user"
+        )
+        button.navigation-menu__user-profile(
+            type="button"
+            @click="$router.push('/profile')"
+        )
             i.fa-sharp.fa-solid.fa-gear
     nuxt-link.navigation-menu__link(v-for='{ to, name, id } in links', :key='id', :to='to')
         span.navigation-menu__link-text.wrap-text {{ name }}

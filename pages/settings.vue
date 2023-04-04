@@ -1,8 +1,6 @@
 <template lang="pug">
 section
-    .container
-        h1.main-title settings page
-        nuxt-link(to="/") Main page
+    h1.main-title Скоро...
 </template>
 
 <script lang="ts">

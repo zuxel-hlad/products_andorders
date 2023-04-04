@@ -1,7 +1,7 @@
 <template lang="pug">
 header.header
     .container.header-wrapper
-        a.header__logo.img-full(href='!#')
+        nuxt-link.header__logo.img-full(to='/')
             img(src='../assets/img/logo.png', alt='invertory logo')
         top-menu
 </template>

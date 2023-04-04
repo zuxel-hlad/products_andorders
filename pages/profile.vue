@@ -6,7 +6,7 @@ section
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-    name: 'groups',
+    name: 'profile',
 });
 </script>
 
