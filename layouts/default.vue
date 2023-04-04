@@ -19,7 +19,7 @@ import { mapState, mapActions } from 'pinia';
 import { useStore } from '~/store';
 import { useProductsStore } from '~/store/products';
 import appHeader from '~/components/app-header.vue';
-import navigationMenu from '~~/components/navigation-menu.vue';
+import navigationMenu from '~/components/navigation-menu.vue';
 import appModal from '~/components/app-modal.vue';
 
 export default defineComponent({

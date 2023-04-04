@@ -2,6 +2,7 @@ export interface Price {
     value: number;
     symbol: 'USD' | 'UAH';
     isDefault: number;
+    label?: string;
 }
 
 export interface Product {
@@ -22,6 +23,13 @@ export interface Product {
     price: Price[];
     order: number;
     date: string;
+    shortDate?: string;
+    available: true | false;
+    executor: string;
+    status: string;
+    state: string;
+    group: string;
+    comingName: string;
 }
 
 export interface Order {

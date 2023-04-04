@@ -14,10 +14,10 @@ section
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
-import { DeletedProduct } from '~~/types/types';
+import { DeletedProduct } from '~/types/types';
 import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
-import { Filters, Product } from '~~/types/types';
+import { Filters, Product } from '~/types/types';
 import productsList from '~/components/products-list.vue';
 import comingBar from '~/components/coming-bar.vue';
 
@@ -28,10 +28,10 @@ export default defineComponent({
         productsList,
     },
     computed: {
-        ...mapState(useProductsStore, {
-            products: (store) => store.products,
-        }),
         ...mapState(useStore, ['modal']),
+        ...mapState(useProductsStore, {
+            products: (store) => store.transformedProducts,
+        }),
         filteredProducts(): Product[] | [] {
             const filter = this.$route.query.filter ? this.$route.query.filter : 'all';
             if (filter === 'all') {
@@ -41,7 +41,13 @@ export default defineComponent({
         },
         filterOptions(): Filters[] | [] {
             if (this.products.length) {
-                return this.products.map((product) => product?.type);
+                const types = this.products.map((item) => item.type);
+                return types.filter((item, index) => {
+                    const firstIndex = types.findIndex((obj) => {
+                        return JSON.stringify(obj) === JSON.stringify(item);
+                    });
+                    return index === firstIndex;
+                });
             } else {
                 return [];
             }

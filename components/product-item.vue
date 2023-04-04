@@ -1,6 +1,8 @@
 <template lang="pug">
 .product-item
-    .product-item__available
+    .product-item__available(
+        :class="{'product-item__available_available': product.available}"
+    )
     .product-item__img.img-full
         img(
             src="~/assets/img/moc_product.png" 
@@ -10,22 +12,29 @@
         span.product-item__descr-text.wrap-text {{ product.title ? product.title : '-' }}
         span.product-item__descr-text.product-item__descr-text_serial.wrap-text {{ product.serialNumber ? product.serialNumber : '-' }}
     .product-item__status
-        span.product-item__status-status У ремонті
+        span.product-item__status-status(
+            :class="{'product-item__status-status_free': product.status === 'вільний'}"
+        ) {{ product.status ? product.status : '-' }}
         .product-item__status-dates
             span з&nbsp;
-                span 06 / 04 / 2017
+                span {{ product.guarantee.start ? product.guarantee.start : '-' }}
             span по&nbsp;
-                span 06 / 08 / 2025
-    span.product-item__state Новий
+                span {{ product.guarantee.end ? product.guarantee.end : '-' }}
+    span.product-item__state {{ product.state ? product.state : '-' }}
     .product-item__prices
-        span.product-item__prices-usd 2500&nbsp;$
-        span.product-item__prices-uah 250 000. 50&nbsp;UAH
-    span.product-item__group-name.wrap-text Дуже дуже довга дліннюча назва групи
-    span.product-item__text.wrap-text Христорождественский Олександр
-    span.product-item__text.wrap-text Дуже дуже довга дліннюча назва приходу
+        template(v-if="product.price.length")
+            span(
+                v-for="(price, idx) in product.price"
+                :class="`product-item__prices-${price?.symbol?.toLocaleLowerCase()}`"
+                :key="idx"
+                ) {{ price.label}}
+        span.product-item__prices-uah(v-else) -
+    span.product-item__group-name.wrap-text {{ product.group ? product.group : '-' }}
+    span.product-item__text.wrap-text {{ product.executor ? product.executor : '-' }}
+    span.product-item__text.wrap-text {{ product.comingName ? product.comingName : '-' }}
     .product-item__coming-date 
-        span.date-short 06 / 12
-        span.date-full 06 / 12 / 2017
+        span.date-short {{ product.shortDate ? product.shortDate : '-' }}
+        span.date-full {{ product.date ? product.date : '-' }}
     button.product-item__delete(
         type="button"
         @click="$emit('delete-product')"
@@ -35,7 +44,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product } from '~~/types/types';
+import { Product } from '~/types/types';
 
 export default defineComponent({
     name: 'product-item',
@@ -80,10 +89,10 @@ export default defineComponent({
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $main-green-color;
+        background-color: $dark;
 
-        &_not-available {
-            background-color: $dark;
+        &_available {
+            background-color: $main-green-color;
         }
     }
 
@@ -121,8 +130,13 @@ export default defineComponent({
             font-size: 16px;
             min-width: 73px;
             text-align: center;
-            color: $main-green-color;
+            color: $dark;
             margin-right: 50px;
+            text-transform: capitalize;
+
+            &_free {
+                color: $main-green-color;
+            }
         }
 
         &-dates {

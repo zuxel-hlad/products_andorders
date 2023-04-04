@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import pageTitle from '~/components/page-title.vue';
-import { Filters } from '~~/types/types';
+import { Filters } from '~/types/types';
 
 export default defineComponent({
     name: 'coming-bar',

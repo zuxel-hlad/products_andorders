@@ -36,15 +36,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { DeletedProduct } from '~~/types/types';
+import { DeletedProduct } from '~/types/types';
 
 export default defineComponent({
     name: 'app-modal',
     props: {
         visibility: {
-            type: Boolean as () => boolean,
-            default: false as false,
-            required: true as true,
+            type: Boolean,
+            default: false,
+            required: true,
         },
         titleType: {
             type: String,
@@ -53,7 +53,7 @@ export default defineComponent({
         },
         deletedItem: {
             type: Object as () => DeletedProduct | null,
-            required: true as true,
+            required: true,
             default: () => {},
         },
     },
