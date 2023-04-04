@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useStore } from './index';
-import { Product } from './store-types';
-import { DeletedProduct } from './store-types';
+import { Product } from '../types/types';
+import { DeletedProduct } from '../types/types';
 import mockData from './mock-data';
 
 interface RootState {

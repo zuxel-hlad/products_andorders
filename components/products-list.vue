@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product, DeletedProduct } from '~~/store/store-types';
+import { Product, DeletedProduct } from '~~/types/types';
 import productItem from '~/components/product-item.vue';
 import comingItem from '~/components/coming-item.vue';
 
@@ -49,11 +49,11 @@ export default defineComponent({
 
 .list-enter-active,
 .list-leave-active {
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease-in, opacity 0.25s ease-in;
 }
 .list-enter-from,
 .list-leave-to {
+    transform: translateY(30px);
     opacity: 0;
-    transform: translateX(30px);
 }
 </style>

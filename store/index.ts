@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { DeletedProduct } from './store-types';
+import { DeletedProduct } from '../types/types';
 export interface RootState {
     modal: boolean;
     deletedProduct: DeletedProduct | null;

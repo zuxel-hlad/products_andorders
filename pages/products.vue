@@ -2,11 +2,11 @@
 section
     comingBar(
         title-text="Продукти"
-        :count="products.length"
-        :filter-options="productsTypes"
+        :count="filteredProducts.length"
+        :filter-options="filterOptions"
     )
     products-list(
-        :products="products"
+        :products="filteredProducts"
         @delete-product="deleteProduct"
         )
 </template>
@@ -14,11 +14,13 @@ section
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
-import { DeletedProduct } from '~~/store/store-types';
+import { DeletedProduct } from '~~/types/types';
 import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
+import { Filters, Product } from '~~/types/types';
 import productsList from '~/components/products-list.vue';
 import comingBar from '~/components/coming-bar.vue';
+
 export default defineComponent({
     name: 'products',
     components: {
@@ -30,8 +32,19 @@ export default defineComponent({
             products: (store) => store.products,
         }),
         ...mapState(useStore, ['modal']),
-        productsTypes(): string[] {
-            return this.products.map((product) => product.type.toLocaleLowerCase());
+        filteredProducts(): Product[] | [] {
+            const filter = this.$route.query.filter ? this.$route.query.filter : 'all';
+            if (filter === 'all') {
+                return this.products;
+            }
+            return this.products.filter((product) => product.type.type === filter);
+        },
+        filterOptions(): Filters[] | [] {
+            if (this.products.length) {
+                return this.products.map((product) => product?.type);
+            } else {
+                return [];
+            }
         },
     },
     methods: {

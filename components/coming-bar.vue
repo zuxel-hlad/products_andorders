@@ -5,17 +5,27 @@
         :counter="count")
     label.coming-bar__select
         span.coming-bar__select-label Тип:
-        select.coming-bar__select-select(name="product-type")
-            option(disabled value="" selected) Виберіть тип
-            option.coming-bar__select-option(value="value1") type 1
-            option.coming-bar__select-option(value="value2") type 2
-            option.coming-bar__select-option(value="value3") type 3
+        select.coming-bar__select-select(
+            @input="setFilter"
+            name="product-type"
+        )
+            option(value="all" selected) Усі
+            template(v-if="filterOptions.length")
+                option.coming-bar__select-option(
+                    v-for="({type, label}, idx) in filterOptions"
+                    :value="type"
+                    :key="idx"
+                ) {{ label }}
+            option.coming-bar__select-option(
+                v-else
+                value=""
+            ) Поки немає фільрів.
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import pageTitle from '~/components/page-title.vue';
-type Options = string[];
+import { Filters } from '~~/types/types';
 
 export default defineComponent({
     name: 'coming-bar',
@@ -31,12 +41,22 @@ export default defineComponent({
             required: true,
         },
         filterOptions: {
-            type: Array as () => Options,
+            type: Array as () => Filters[],
             default: () => [],
             requiered: true,
         },
     },
     components: { pageTitle },
+    created() {
+        this.$router.replace({ query: { filter: 'all' } });
+    },
+    methods: {
+        setFilter(event: Event): void {
+            const value = (event.target as HTMLInputElement).value;
+            console.log(value);
+            this.$router.replace({ query: { filter: value } });
+        },
+    },
 });
 </script>
 
@@ -69,6 +89,7 @@ export default defineComponent({
             font-size: 16px;
             border-radius: 6px;
             border: 1px solid $light-gray;
+            outline-color: $product-serial-color;
         }
 
         &-option {

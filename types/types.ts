@@ -10,7 +10,10 @@ export interface Product {
     isNew: number;
     photo: string;
     title: string;
-    type: string;
+    type: {
+        type: string;
+        label: string;
+    };
     specification: string;
     guarantee: {
         start: string;
@@ -33,4 +36,9 @@ export interface DeletedProduct {
     title: string;
     id: string | number;
     serialNumber: number | string;
+}
+
+export interface Filters {
+    type: string;
+    label: string;
 }

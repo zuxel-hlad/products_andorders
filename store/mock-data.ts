@@ -1,4 +1,4 @@
-import { Order, Product } from './store-types';
+import { Order, Product } from '../types/types';
 
 export const mockData = {
     orders: [
@@ -34,11 +34,14 @@ export const mockData = {
     products: [
         {
             id: 1,
-            serialNumber: 'SN-12.3456789',
+            serialNumber: 'SN-12.34567891',
             isNew: 1,
             photo: 'img1',
             title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
-            type: 'Monitors',
+            type: {
+                type: 'monitors',
+                label: 'Монітори',
+            },
             specification: 'Specification 1',
             guarantee: {
                 start: '2017-06-29 12:09:33',
@@ -53,11 +56,14 @@ export const mockData = {
         },
         {
             id: 2,
-            serialNumber: 'SN-12.3456789',
+            serialNumber: 'SN-12.34567892',
             isNew: 1,
             photo: 'img2',
             title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
-            type: 'videocard',
+            type: {
+                type: 'videocards',
+                label: 'Відеокарти',
+            },
             specification: 'Specification 1',
             guarantee: {
                 start: '2017-06-29 12:09:33',
@@ -72,11 +78,14 @@ export const mockData = {
         },
         {
             id: 3,
-            serialNumber: 'SN-12.3456789',
+            serialNumber: 'SN-12.34567893',
             isNew: 4,
             photo: 'img3',
             title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
-            type: 'motherboard',
+            type: {
+                type: 'motherboards',
+                label: 'Материнські плати',
+            },
             specification: 'Specification 1',
             guarantee: {
                 start: '2017-06-29 12:09:33',

@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product } from '~~/store/store-types';
+import { Product } from '~~/types/types';
 
 export default defineComponent({
     name: 'product-item',

@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { DeletedProduct } from '~~/store/store-types';
+import { DeletedProduct } from '~~/types/types';
 
 export default defineComponent({
     name: 'app-modal',
