@@ -6,7 +6,10 @@ export default defineNuxtConfig({
             mode: 'out-in',
         },
     },
-    plugins: [{ src: '~/plugins/height.ts', mode: 'client' }],
+    plugins: [
+        { src: '~/plugins/height.ts', mode: 'client' },
+        { src: '~/plugins/socket-io.ts', mode: 'client' },
+    ],
     css: ['~/assets/scss/styles.scss'],
     vite: {
         css: {
@@ -20,4 +23,5 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@pinia/nuxt'],
+    components: false,
 });

@@ -11,13 +11,14 @@
             span.top-menu__info-text {{ today }}
             span.top-menu__info-text {{ todayDate }}
         .top-menu__info-clock
-            .clock-icon.img-full
-                img(
-                    src="../assets/svg/clock.svg" 
-                    alt="clock icon"
-                )
-            span.top-menu__info-text {{ time }}
-                
+            span.top-menu__info-text
+                .clock-icon.img-full
+                    img(
+                        src="../assets/svg/clock.svg" 
+                        alt="clock icon"
+                    )
+                | {{ time }}
+            span.top-menu__info-text Користувачів: 12
 </template>
 
 <script lang="ts">
@@ -67,7 +68,6 @@ export default defineComponent({
             const date = new Date();
             const hours = date.getHours();
             const minutes = date.getMinutes();
-
             this.time = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
         },
     },
@@ -92,8 +92,7 @@ export default defineComponent({
 
         &-clock {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            flex-direction: column;
 
             & .clock-icon {
                 width: 20px;
@@ -104,7 +103,9 @@ export default defineComponent({
         }
 
         &-text {
-            display: block;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
             margin-bottom: 5px;
             &:last-child {
                 margin-bottom: 0;

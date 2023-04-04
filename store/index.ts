@@ -3,6 +3,7 @@ import { DeletedProduct } from '../types/types';
 export interface RootState {
     modal: boolean;
     deletedProduct: DeletedProduct | null;
+    activeSessions: number;
 }
 
 export const useStore = defineStore('root', {
@@ -10,6 +11,7 @@ export const useStore = defineStore('root', {
         return {
             modal: false,
             deletedProduct: {},
+            activeSessions: 0,
         } as RootState;
     },
 
@@ -21,6 +23,9 @@ export const useStore = defineStore('root', {
         closeModal(): void {
             this.modal = false;
             this.deletedProduct = null;
+        },
+        setActiveSessions(count: number): void {
+            this.activeSessions = count;
         },
     },
 });
