@@ -10,7 +10,12 @@ aside.navigation-menu
             @click="$router.push('/profile')"
         )
             i.fa-sharp.fa-solid.fa-gear
-    nuxt-link.navigation-menu__link(v-for='{ to, name, id } in links', :key='id', :to='to')
+    nuxt-link.navigation-menu__link(
+        v-for='{ to, name, id } in links',
+        :class="{'router-link-exact-active': $route.path.includes('order') && to === '/'}"
+        :key='id', 
+        :to='to'
+        )
         span.navigation-menu__link-text.wrap-text {{ name }}
 </template>
 

@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { mapState } from 'pinia';
 import { defineComponent } from 'vue';
+import { mapState } from 'pinia';
 import { useStore } from '~/store';
 
 export default defineComponent({

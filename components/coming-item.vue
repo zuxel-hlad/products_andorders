@@ -1,6 +1,8 @@
 <template lang="pug">
-.coming-item
-    span.coming-item__coming-name Дуже дуже довга дліннюча назва приходу
+.coming-item(
+    :class="{'coming-item_short': isShort}"
+)
+    nuxt-link(to="/order-15").coming-item__coming-name Дуже дуже довга дліннюча назва приходу
     .coming-item__products
         button.coming-item__products-btn(type="button")
             i.fa-solid.fa-list-ul
@@ -13,7 +15,10 @@
     .coming-item__prices
         span.coming-item__prices-usd 2500&nbsp;$
         span.coming-item__prices-uah 250 000. 50&nbsp;UAH
-    button.coming-item__delete(type="button")
+    button.coming-item__delete(
+        type="button"
+        @click="$emit('delete-coming')"
+        )
         i.fa-regular.fa-trash-can
 
 </template>
@@ -23,14 +28,21 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'coming-item',
+    props: {
+        isShort: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+    },
 });
 </script>
 <style scoped lang="scss">
 .coming-item {
     padding: 10px 36px;
-    min-width: 1434px;
+    width: 100%;
     display: grid;
-    grid-template-columns: 578px 131px 112px 122px 16px;
+    grid-template-columns: 425px 131px 112px 122px 26px;
     grid-template-rows: 1fr;
     grid-auto-rows: 1fr;
     justify-content: space-between;
@@ -51,9 +63,20 @@ export default defineComponent({
 
     &__coming-name {
         display: block;
+        text-decoration: none;
         font-size: 16px;
         color: $product-date-color;
         text-align: left;
+        border-bottom: 1px solid $product-date-color;
+        padding-bottom: 1px;
+        transition: color 0.25s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                color: $dark;
+                text-decoration-color: $dark;
+            }
+        }
     }
 
     &__products {
@@ -131,6 +154,7 @@ export default defineComponent({
     }
 
     &__delete {
+        padding: 5px;
         border: none;
         background: transparent;
         display: flex;
@@ -145,6 +169,22 @@ export default defineComponent({
             &:hover {
                 color: $dark;
             }
+        }
+    }
+
+    &_short {
+        grid-template-columns: 130px 1fr;
+        max-width: 478px;
+        .coming-item__coming-name {
+            display: none;
+        }
+
+        .coming-item__prices {
+            display: none;
+        }
+
+        .coming-item__delete {
+            display: none;
         }
     }
 }

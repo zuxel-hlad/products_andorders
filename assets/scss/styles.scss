@@ -21,6 +21,17 @@ body {
     transform: translateX(20px);
 }
 
+.list-enter-active,
+.list-leave-active {
+    transition: 0.5s;
+}
+.list-enter-from,
+.list-leave-to {
+    transform: translateY(-30px);
+    transform: translateX(-30px);
+    opacity: 0;
+}
+
 section {
     flex: 1 1 calc(100% - 197px);
     padding: 150px 66px 75px 125px;
