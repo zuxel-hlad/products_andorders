@@ -40,10 +40,21 @@ export interface Order {
     products: Product[];
 }
 
+export interface ComingOrder {
+    date: string;
+    description: string;
+    id: number;
+    products: Product[];
+    shortDate: string;
+    title: string;
+    totalSumUAH: string;
+    totalSumUSD: string;
+}
+
 export interface DeletedProduct {
     title: string;
     id: string | number;
-    serialNumber: number | string;
+    serialNumber?: number | string;
 }
 
 export interface Filters {

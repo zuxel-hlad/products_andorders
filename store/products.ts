@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 import { useStore } from './index';
 import { Product } from '../types/types';
 import { DeletedProduct } from '../types/types';
-import mockData from './mock-data';
+import { products } from './mock-data';
+import transformDate from '~/helpers/transform-date';
 
 interface RootState {
     products: Product[];
@@ -13,24 +14,12 @@ const { closeModal } = useStore();
 export const useProductsStore = defineStore('products', {
     state: (): RootState => {
         return {
-            products: mockData.products,
+            products,
         };
     },
 
     getters: {
         transformedProducts(state) {
-            const transformDate = (dateString: string, short: boolean): string => {
-                const date = new Date(dateString);
-                const day = date.getDate().toString().padStart(2, '0');
-                const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                const year = date.getFullYear();
-                if (short) {
-                    return `${day} / ${month}`;
-                } else {
-                    return `${day} / ${month} /  ${year}`;
-                }
-            };
-
             if (state.products.length) {
                 return state.products.map((product) => ({
                     ...product,

@@ -11,7 +11,7 @@
                 alt="close modal" 
                 title="close modal"
             )
-        h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей {{titleType}}?
+        h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей {{ titleType }} ?
         .modal-content__product
             .modal-content__product-status 
             .modal-content__product-img.img-full
@@ -37,6 +37,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { DeletedProduct } from '~/types/types';
+import { useStore } from '~/store';
+import { mapState } from 'pinia';
 
 export default defineComponent({
     name: 'app-modal',
@@ -46,16 +48,24 @@ export default defineComponent({
             default: false,
             required: true,
         },
-        titleType: {
-            type: String,
-            required: true,
-            default: '',
-        },
         deletedItem: {
             type: Object as () => DeletedProduct | null,
             required: true,
             default: () => {},
         },
+        titleType: {
+            type: String,
+            required: true,
+            default: '',
+        },
+        modalType: {
+            type: String as () => 'order' | 'product',
+            required: true,
+            default: '',
+        },
+    },
+    computed: {
+        ...mapState(useStore, ['deletedProduct']),
     },
 });
 </script>

@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product, DeletedProduct } from '~/types/types';
+import { Product } from '~/types/types';
 import productItem from '~/components/product-item.vue';
 import comingItem from '~/components/coming-item.vue';
 
@@ -29,7 +29,7 @@ export default defineComponent({
     },
     components: { productItem, comingItem },
     methods: {
-        setDeletedItem({ id, serialNumber, title }: DeletedProduct): void {
+        setDeletedItem({ id, serialNumber, title }: Product): void {
             this.$emit('delete-product', { id, serialNumber, title });
         },
     },

@@ -2,19 +2,19 @@
 .coming-item(
     :class="{'coming-item_short': isShort}"
 )
-    nuxt-link(to="/order-15").coming-item__coming-name Дуже дуже довга дліннюча назва приходу
+    nuxt-link(:to="`/order-${order.id}`").coming-item__coming-name {{ order.title ? order.title : '-' }}
     .coming-item__products
         button.coming-item__products-btn(type="button")
             i.fa-solid.fa-list-ul
         .coming-item__products-text
-            span.coming-item__products-count 23
+            span.coming-item__products-count {{ order.products.length ? order.products.length : '-' }}
             span.coming-item__products-text Продукти
     .coming-item__coming-date 
-        span.date-short 06 / 12
-        span.date-full 06 / 12 / 2017
+        span.date-short {{ order.shortDate ? order.shortDate : '-' }}
+        span.date-full {{ order.date ? order.date : '-' }}
     .coming-item__prices
-        span.coming-item__prices-usd 2500&nbsp;$
-        span.coming-item__prices-uah 250 000. 50&nbsp;UAH
+        span.coming-item__prices-usd {{ order.totalSumUSD ? order.totalSumUSD : '-' }}
+        span.coming-item__prices-uah {{ order.totalSumUAH ? order.totalSumUAH : '-' }}
     button.coming-item__delete(
         type="button"
         @click="$emit('delete-coming')"
@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { ComingOrder } from '~/types/types';
 
 export default defineComponent({
     name: 'coming-item',
@@ -33,6 +34,11 @@ export default defineComponent({
             type: Boolean,
             required: false,
             default: false,
+        },
+        order: {
+            type: Object as () => ComingOrder,
+            required: true,
+            default: () => {},
         },
     },
 });

@@ -7,8 +7,17 @@ section
     )
     products-list(
         :products="filteredProducts"
-        @delete-product="deleteProduct"
+        @delete-product="deleteProductItem"
         )
+app-modal(
+    titleType="продукт"
+    modalType="product"
+    :visibility="modal"
+    :deletedItem="deletedProduct"
+    @close-modal="closeModal"
+    @cancel="closeModal"
+    @delete="deleteProduct(deletedProduct)"
+)
 </template>
 
 <script lang="ts">
@@ -20,15 +29,17 @@ import { useStore } from '~/store';
 import { Filters, Product } from '~/types/types';
 import productsList from '~/components/products-list.vue';
 import comingBar from '~/components/coming-bar.vue';
+import appModal from '~/components/app-modal.vue';
 
 export default defineComponent({
     name: 'products',
     components: {
         comingBar,
         productsList,
+        appModal,
     },
     computed: {
-        ...mapState(useStore, ['modal']),
+        ...mapState(useStore, ['modal', 'deletedProduct']),
         ...mapState(useProductsStore, {
             products: (store) => store.transformedProducts,
         }),
@@ -54,9 +65,10 @@ export default defineComponent({
         },
     },
     methods: {
-        ...mapActions(useStore, ['openModal']),
-        deleteProduct(deletedProduct: DeletedProduct): void {
-            this.openModal(deletedProduct);
+        ...mapActions(useProductsStore, ['deleteProduct']),
+        ...mapActions(useStore, ['openModal', 'closeModal']),
+        deleteProductItem(deletedObj: DeletedProduct): void {
+            this.openModal(deletedObj);
         },
     },
 });
