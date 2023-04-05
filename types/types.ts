@@ -51,7 +51,7 @@ export interface ComingOrder {
     totalSumUSD: string;
 }
 
-export interface DeletedProduct {
+export interface DeletedItem {
     title: string;
     id: string | number;
     serialNumber?: number | string;

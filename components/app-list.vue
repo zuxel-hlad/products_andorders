@@ -1,30 +1,32 @@
 <template lang="pug">
-.coming-list
+.app-list(:class="customClass")
     slot
-        
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import comingItem from '~/components/coming-item.vue';
 export default defineComponent({
     name: 'coming-list',
-    components: { comingItem },
+    props: {
+        customClass: {
+            type: String,
+            required: false,
+            default: '',
+        },
+    },
 });
 </script>
 
 <style scoped lang="scss">
-.coming-list {
-    padding-top: 52px;
+.app-list {
     width: 100%;
     max-width: 1440px;
     padding-bottom: 21px;
     overflow: auto;
-
-    &::v-deep(> div) {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
 }
 </style>

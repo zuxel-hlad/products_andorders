@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { useStore } from './index';
 import { Product } from '../types/types';
-import { DeletedProduct } from '../types/types';
 import { products } from './mock-data';
 import transformDate from '~/helpers/transform-date';
 
@@ -9,7 +8,7 @@ interface RootState {
     products: Product[];
 }
 
-const { closeModal } = useStore();
+const rootStore = useStore();
 
 export const useProductsStore = defineStore('products', {
     state: (): RootState => {
@@ -41,10 +40,11 @@ export const useProductsStore = defineStore('products', {
     },
 
     actions: {
-        deleteProduct(product: DeletedProduct | null): void {
-            if (product) {
-                this.products = this.products.filter((item) => item.id !== product.id);
-                closeModal();
+        deleteProduct(): void {
+            const deletedObjId = rootStore.deletedItem?.id;
+            if (deletedObjId) {
+                this.products = this.products.filter((item) => item.id !== deletedObjId);
+                rootStore.closeModal();
             } else {
                 return;
             }

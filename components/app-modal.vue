@@ -36,7 +36,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { DeletedProduct } from '~/types/types';
 import { useStore } from '~/store';
 import { mapState } from 'pinia';
 
@@ -47,11 +46,6 @@ export default defineComponent({
             type: Boolean,
             default: false,
             required: true,
-        },
-        deletedItem: {
-            type: Object as () => DeletedProduct,
-            required: true,
-            default: () => {},
         },
         titleType: {
             type: String,
@@ -65,7 +59,7 @@ export default defineComponent({
         },
     },
     computed: {
-        ...mapState(useStore, ['deletedProduct']),
+        ...mapState(useStore, ['deletedItem']),
     },
 });
 </script>

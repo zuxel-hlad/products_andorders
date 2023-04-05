@@ -1,7 +1,7 @@
 import { orders } from './mock-data';
 import { defineStore } from 'pinia';
 import { Order } from '~/types/types';
-import { DeletedProduct } from '../types/types';
+import { DeletedItem } from '../types/types';
 import { useStore } from './index';
 import transformDate from '~/helpers/transform-date';
 import calcTotalProductsPrice from '~/helpers/calc-total-products-price';
@@ -10,7 +10,7 @@ export interface RootState {
     orders: Order[];
 }
 
-const { closeModal } = useStore();
+const rootStore = useStore();
 
 export const useOrdersStore = defineStore('orders', {
     state: () => {
@@ -30,10 +30,11 @@ export const useOrdersStore = defineStore('orders', {
         },
     },
     actions: {
-        deleteOrder(product: DeletedProduct | null): void {
-            if (product) {
-                this.orders = this.orders.filter((item) => item.id !== product.id);
-                closeModal();
+        deleteOrder(): void {
+            const deletedObjId = rootStore.deletedItem?.id;
+            if (deletedObjId) {
+                this.orders = this.orders.filter((item) => item.id !== deletedObjId);
+                rootStore.closeModal();
             } else {
                 return;
             }

@@ -53,7 +53,6 @@ export default defineComponent({
     methods: {
         setFilter(event: Event): void {
             const value = (event.target as HTMLInputElement).value;
-            console.log(value);
             this.$router.replace({ query: { filter: value } });
         },
     },

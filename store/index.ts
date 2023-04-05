@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { DeletedProduct } from '../types/types';
+import { DeletedItem } from '../types/types';
 export interface RootState {
     modal: boolean;
-    deletedProduct: DeletedProduct | {};
+    deletedItem: null | DeletedItem;
     activeSessions: number;
 }
 
@@ -10,19 +10,19 @@ export const useStore = defineStore('root', {
     state: () => {
         return {
             modal: false,
-            deletedProduct: {},
+            deletedItem: null,
             activeSessions: 0,
         } as RootState;
     },
 
     actions: {
-        openModal(deletedObj: DeletedProduct): void {
+        openModal(deletedObj: DeletedItem): void {
             this.modal = true;
-            this.deletedProduct = deletedObj;
+            this.deletedItem = deletedObj;
         },
         closeModal(): void {
             this.modal = false;
-            this.deletedProduct = {};
+            this.deletedItem = null;
         },
         setActiveSessions(count: number): void {
             this.activeSessions = count;
