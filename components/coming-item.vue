@@ -4,7 +4,11 @@
 )
     nuxt-link(:to="`/order-${order?.id}`").coming-item__coming-name {{ order.title ? order.title : '-' }}
     .coming-item__products
-        button.coming-item__products-btn(type="button")
+        button.coming-item__products-btn(
+            type="button"
+            :title="isShort ? 'Закрити деталі приходу' : 'Відкрити деталі приходу'"
+            @click="$emit('open-details')"
+            )
             i.fa-solid.fa-list-ul
         .coming-item__products-text
             span.coming-item__products-count {{ order.products.length ? order.products.length : '-' }}
@@ -180,7 +184,9 @@ export default defineComponent({
 
     &_short {
         grid-template-columns: 130px 1fr;
-        max-width: 478px;
+        gap: 40px;
+        position: relative;
+
         .coming-item__coming-name {
             display: none;
         }
@@ -191,6 +197,11 @@ export default defineComponent({
 
         .coming-item__delete {
             display: none;
+        }
+
+        .coming-item__coming-date {
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 }

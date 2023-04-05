@@ -5,19 +5,24 @@ section
         titleText="Приходи"
         :counter="orders.length"
     )
-    app-list(
-        v-if="orders.length"
-        customClass="coming-list"
-        )
-        transition-group(name="orders-list")
-            coming-item(
-                v-for="(order,idx) in orders"
-                    :key="order.id"
-                    :tabindex="idx"
-                    :order="order"
-                    @delete-coming="deleteOrderItem(order)"
+    .orders-wrapper(:class="{'orders-wrapper_with-details': orderDetails}")
+        app-list(v-if="orders.length")
+            transition-group(name="orders-list")
+                coming-item(
+                    v-for="(order,idx) in orders"
+                        :key="order.id"
+                        :tabindex="idx"
+                        :order="order"
+                        :isShort="orderDetails"
+                        @delete-coming="deleteOrderItem(order)"
+                        @open-details="orderDetails = !orderDetails"
+                    )
+        h4.main-title(v-else) Приходів покищо немає.
+        transition
+            order-details(
+                v-if="orderDetails"
+                @close-details="orderDetails = false"
                 )
-    h4.main-title(v-else) Приходів покищо немає.
     app-modal(
         titleType="прихід"
         modalType="order"
@@ -39,6 +44,7 @@ import pageTitle from '~/components/page-title.vue';
 import appList from '~/components/app-list.vue';
 import comingItem from '~/components/coming-item.vue';
 import appModal from '~/components/app-modal.vue';
+import orderDetails from '~/components/order-details.vue';
 export default defineComponent({
     name: 'home',
     components: {
@@ -46,6 +52,12 @@ export default defineComponent({
         appList,
         comingItem,
         appModal,
+        orderDetails,
+    },
+    data() {
+        return {
+            orderDetails: true,
+        };
     },
     computed: {
         ...mapState(useStore, ['modal', 'deletedItem']),
@@ -63,8 +75,17 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-.coming-list {
+.orders-wrapper {
     padding-top: 52px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+
+    &_with-details {
+        gap: 15px;
+        grid-template-columns: minmax(300px, 400px) 1fr;
+    }
 }
 
 .orders-list-enter-active,
@@ -75,5 +96,15 @@ export default defineComponent({
 .orders-list-leave-to {
     opacity: 0;
     transform: translateX(30px);
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.25s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>
