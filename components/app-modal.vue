@@ -1,6 +1,6 @@
 <template lang="pug">
 .modal(
-    :class="{'modal_active': visibility}")
+    :class="{'modal_active': visibility,'modal_order': modalType === 'order'}")
     .modal-content(@click.stop)
         button.modal-content__close.img-full(
             type="button" 
@@ -49,7 +49,7 @@ export default defineComponent({
             required: true,
         },
         deletedItem: {
-            type: Object as () => DeletedProduct | null,
+            type: Object as () => DeletedProduct,
             required: true,
             default: () => {},
         },
@@ -91,7 +91,19 @@ export default defineComponent({
         visibility: visible;
     }
 
+    &_order {
+        .modal-content__product-status {
+            display: none;
+        }
+
+        .modal-content__product-img {
+            display: none;
+        }
+    }
+
     &-content {
+        display: flex;
+        flex-direction: column;
         position: relative;
         flex: 1 1 auto;
         max-width: 791px;
@@ -126,6 +138,7 @@ export default defineComponent({
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            flex-grow: 1;
 
             &-status {
                 width: 10px;
@@ -141,6 +154,9 @@ export default defineComponent({
                 height: 34px;
                 margin-right: 72px;
                 flex-shrink: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             &-text {

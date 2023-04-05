@@ -9,15 +9,15 @@ section
         :products="filteredProducts"
         @delete-product="deleteProductItem"
         )
-app-modal(
-    titleType="продукт"
-    modalType="product"
-    :visibility="modal"
-    :deletedItem="deletedProduct"
-    @close-modal="closeModal"
-    @cancel="closeModal"
-    @delete="deleteProduct(deletedProduct)"
-)
+    app-modal(
+        titleType="продукт"
+        modalType="product"
+        :visibility="modal"
+        :deletedItem="deletedProduct"
+        @close-modal="closeModal"
+        @cancel="closeModal"
+        @delete="deleteProduct(deletedProduct)"
+    )
 </template>
 
 <script lang="ts">

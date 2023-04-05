@@ -1,7 +1,6 @@
 <template lang="pug">
 .coming-list
-    TransitionGroup(name="list" tag="div")
-        slot
+    slot
         
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 section
-    h1.main-title Скоро ...
+    h1.main-title Вже скоро ...
 </template>
 
 <script lang="ts">
@@ -10,4 +10,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style></style>

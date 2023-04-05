@@ -2,7 +2,7 @@
 .coming-item(
     :class="{'coming-item_short': isShort}"
 )
-    nuxt-link(:to="`/order-${order.id}`").coming-item__coming-name {{ order.title ? order.title : '-' }}
+    nuxt-link(:to="`/order-${order?.id}`").coming-item__coming-name {{ order.title ? order.title : '-' }}
     .coming-item__products
         button.coming-item__products-btn(type="button")
             i.fa-solid.fa-list-ul
