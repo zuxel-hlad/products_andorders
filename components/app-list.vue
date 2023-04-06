@@ -6,7 +6,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-    name: 'coming-list',
+    name: 'app-list',
     props: {
         withOverflow: {
             type: Boolean,

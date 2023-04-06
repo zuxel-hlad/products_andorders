@@ -20,7 +20,7 @@
                     isShort
                     :key="product.id" 
                     :product="product"
-                    :selected="idx === seletedIdx + 1 && seletedIdx <= products.length"
+                    :selected="product.order === selectedOrderId"
                     @delete-product="$emit('delete-product',product)"
              )
     h4.main-title.details__empty(v-else) Продуктів покищо немає.
@@ -38,8 +38,14 @@ export default defineComponent({
             required: true,
             default: () => [],
         },
+        selectedOrderId: {
+            type: Number as () => number | null,
+            required: true,
+            default: null,
+        },
     },
     components: { productItem },
+    computed: {},
     data() {
         return {
             seletedIdx: 1,
@@ -144,6 +150,6 @@ export default defineComponent({
 .details-list-enter-from,
 .details-list-leave-to {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(-10px);
 }
 </style>

@@ -14,16 +14,19 @@ section.orders
                         :tabindex="idx"
                         :order="order"
                         :isShort="orderDetails"
+                        :selected="orderId === order.id"
                         @delete-coming="deleteOrderItem(order)"
-                        @open-details="orderDetails = !orderDetails"
+                        @open-details="openOrderDetails(order.id)"
+                        @view-details="orderId = order.id"
                     )
         h4.main-title(v-else) Приходів покищо немає.
         .orders-wrapper__list(:class="{'orders-wrapper__list_active': orderDetails}")
             order-details(
                 v-if="orderDetails"
-                :products="products"
+                :products="selectedOrderProducts"
                 @close-details="orderDetails = false"
                 @delete-product="deletedProductItem"
+                :selectedOrderId="orderId"
                 )
     app-modal(
         modalType="order"
@@ -60,6 +63,7 @@ export default defineComponent({
     data() {
         return {
             orderDetails: false,
+            orderId: null as null | number,
         };
     },
     computed: {
@@ -70,6 +74,13 @@ export default defineComponent({
         ...mapState(useOrdersStore, {
             orders: (store) => store.formattedProducts,
         }),
+        selectedOrderProducts() {
+            if (!this.orderId) {
+                return [];
+            } else {
+                return this.orders?.find((order) => order?.id === this.orderId)?.products;
+            }
+        },
     },
     methods: {
         ...mapActions(useStore, ['openModal', 'closeModal']),
@@ -87,6 +98,10 @@ export default defineComponent({
             } else {
                 this.deleteOrder();
             }
+        },
+        openOrderDetails(id: number): void {
+            this.orderDetails = !this.orderDetails;
+            this.orderId = id ? id : null;
         },
     },
 });

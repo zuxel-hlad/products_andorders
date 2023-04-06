@@ -1,6 +1,6 @@
 <template lang="pug">
 .coming-item(
-    :class="{'coming-item_short': isShort}"
+    :class="{'coming-item_short': isShort, 'coming-item_selected': isShort && selected}"
 )
     span.coming-item__coming-name {{ order.title ? order.title : '-' }}
     .coming-item__products
@@ -24,7 +24,7 @@
         @click="$emit('delete-coming')"
         )
         i.fa-regular.fa-trash-can
-    button.coming-item__details
+    button.coming-item__details(@click="$emit('view-details')")
         i.fa-solid.fa-chevron-right
 </template>
 
@@ -44,6 +44,11 @@ export default defineComponent({
             type: Object as () => ComingOrder,
             required: true,
             default: () => {},
+        },
+        selected: {
+            type: Boolean,
+            required: false,
+            default: false,
         },
     },
 });
@@ -228,6 +233,12 @@ export default defineComponent({
                     right: 0;
                 }
             }
+        }
+    }
+
+    &_selected {
+        .coming-item__details {
+            right: 0;
         }
     }
 }

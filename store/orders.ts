@@ -1,6 +1,6 @@
 import { orders, products } from './mock-data';
 import { defineStore } from 'pinia';
-import { Order } from '~/types/types';
+import { Order, Product } from '~/types/types';
 import { DeletedItem } from '../types/types';
 import { useStore } from './index';
 import transformDate from '~/helpers/transform-date';
@@ -20,15 +20,19 @@ export const useOrdersStore = defineStore('orders', {
     },
     getters: {
         formattedProducts(state) {
+            const filterProducts = (items: Product[], id: number): Product[] => {
+                if (items.length) {
+                    return items.filter((item) => item.order === id);
+                } else return [];
+            };
+
             return state.orders.map((order) => ({
                 ...order,
-                get products() {
-                    return order.products.filter((product) => product.order === order.id);
-                },
+                products: filterProducts(order.products, order.id),
                 shortDate: transformDate(order.date, true),
                 date: transformDate(order.date, false),
-                totalSumUSD: `${calcTotalProductsPrice(order.products, 'usd')} $`,
-                totalSumUAH: `${calcTotalProductsPrice(order.products, 'uah')} UAH`,
+                totalSumUSD: `${calcTotalProductsPrice(filterProducts(order.products, order.id), 'usd')} $`,
+                totalSumUAH: `${calcTotalProductsPrice(filterProducts(order.products, order.id), 'uah')} UAH`,
             }));
         },
     },
