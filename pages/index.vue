@@ -90,7 +90,6 @@ export default defineComponent({
             this.openModal(deletedObj);
         },
         deletedProductItem({ id, serialNumber, title }: DeletedItem): void {
-            console.log({ id, serialNumber, title });
             this.openModal({ id, serialNumber, title, parentId: this.orderId! });
         },
         checkDeleteItemFunctionType() {

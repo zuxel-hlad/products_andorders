@@ -1,5 +1,5 @@
 <template lang="pug">
-section
+section.products
     comingBar(
         title-text="Продукти"
         :count="filteredProducts.length"
@@ -33,6 +33,7 @@ import { mapState, mapActions } from 'pinia';
 import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
 import { Filters, Product } from '~/types/types';
+import { addDeltaXScroll, removeDeltaXScroll } from '~/helpers/handle-deltaX-scroll';
 import appList from '~/components/app-list.vue';
 import comingBar from '~/components/coming-bar.vue';
 import appModal from '~/components/app-modal.vue';
@@ -80,6 +81,14 @@ export default defineComponent({
         deletedProductItem({ id, serialNumber, title }: Product): void {
             this.openModal({ id, serialNumber, title });
         },
+    },
+    mounted() {
+        setTimeout(() => {
+            addDeltaXScroll('.app-list');
+        }, 300);
+    },
+    beforeUnmount() {
+        removeDeltaXScroll('.app-list');
     },
 });
 </script>
