@@ -46,5 +46,22 @@ export const useOrdersStore = defineStore('orders', {
                 return;
             }
         },
+        deleteOrderProduct(): void {
+            const deletedObjId = rootStore.deletedItem?.id;
+            const deletedObjParentId = rootStore.deletedItem?.parentId;
+
+            if (!deletedObjId && !deletedObjParentId) return;
+            this.orders = this.orders.map((order) => {
+                if (order.id === deletedObjParentId) {
+                    return {
+                        ...order,
+                        products: order.products.filter((o) => o.id !== deletedObjId),
+                    };
+                } else {
+                    return order;
+                }
+            });
+            rootStore.closeModal();
+        },
     },
 });

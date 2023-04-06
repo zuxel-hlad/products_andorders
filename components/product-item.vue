@@ -70,7 +70,6 @@ export default defineComponent({
         itemStyleClass() {
             return {
                 'product-item_short': this.isShort,
-                'product-item_selected': this.selected && this.isShort,
             };
         },
     },
@@ -134,6 +133,7 @@ export default defineComponent({
             &_serial {
                 color: $product-serial-color;
                 margin-bottom: 0;
+                text-transform: uppercase;
             }
         }
     }
@@ -277,10 +277,6 @@ export default defineComponent({
                 box-shadow: 0px 22px 24px -17px $product-serial-color inset;
             }
         }
-    }
-
-    &_selected {
-        box-shadow: 0px 22px 24px -17px $product-serial-color inset;
     }
 }
 </style>

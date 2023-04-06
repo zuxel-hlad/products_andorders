@@ -54,6 +54,7 @@ export interface ComingOrder {
 export interface DeletedItem {
     title: string;
     id: string | number;
+    parentId?: string | number;
     serialNumber?: number | string;
 }
 

@@ -1,5 +1,7 @@
 import { Order, Product } from '../types/types';
 import generateMockPrice from '~/helpers/generate-mock-price';
+import generateRandomSerial from '~/helpers/generate-random-serial';
+generateRandomSerial(10);
 export const orders = [
     {
         id: 1,
@@ -42,7 +44,7 @@ export const orders = [
 export const products = [
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567891',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 12,
         photo: 'img1',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -70,7 +72,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567891',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 12,
         photo: 'img1',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -98,7 +100,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567891',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 12,
         photo: 'img1',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -126,7 +128,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567892',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 22,
         photo: 'img2',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -154,7 +156,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567892',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 22,
         photo: 'img2',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -182,7 +184,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: 'SN-12.34567892',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 22,
         photo: 'img2',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -210,7 +212,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -238,7 +240,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -266,7 +268,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -294,7 +296,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -322,7 +324,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
@@ -350,7 +352,7 @@ export const products = [
     },
     {
         id: generateMockPrice(),
-        serialNumber: '',
+        serialNumber: `SN-${generateRandomSerial(10)}`,
         isNew: 7,
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',

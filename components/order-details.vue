@@ -14,15 +14,14 @@
         button.details__add-product(type="button") Додати продукт
             i.fa-solid.fa-plus
     .details__list(v-if="products.length")
-        transition-group(name="details-list")
-            product-item(
-                    v-for="(product, idx) in products" 
-                    isShort
-                    :key="product.id" 
-                    :product="product"
-                    :selected="product.order === selectedOrderId"
-                    @delete-product="$emit('delete-product',product)"
-             )
+        product-item(
+                v-for="(product) in products" 
+                isShort
+                :key="product.id" 
+                :product="product"
+                :selected="false"
+                @delete-product="$emit('delete-product',product)"
+            )
     h4.main-title.details__empty(v-else) Продуктів покищо немає.
 </template>
 
@@ -59,6 +58,7 @@ export default defineComponent({
     border-radius: 6px;
     background-color: $white;
     border: 1px solid $light-gray;
+    min-width: 770px;
 
     &__empty {
         text-align: center;

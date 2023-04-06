@@ -84,23 +84,25 @@ export default defineComponent({
     },
     methods: {
         ...mapActions(useStore, ['openModal', 'closeModal']),
-        ...mapActions(useOrdersStore, ['deleteOrder']),
+        ...mapActions(useOrdersStore, ['deleteOrder', 'deleteOrderProduct']),
         ...mapActions(useProductsStore, ['deleteProduct']),
         deleteOrderItem(deletedObj: DeletedItem): void {
             this.openModal(deletedObj);
         },
         deletedProductItem({ id, serialNumber, title }: DeletedItem): void {
-            this.openModal({ id, serialNumber, title });
+            console.log({ id, serialNumber, title });
+            this.openModal({ id, serialNumber, title, parentId: this.orderId! });
         },
         checkDeleteItemFunctionType() {
             if (this.orderDetails) {
-                this.deleteProduct();
+                this.deleteOrderProduct();
             } else {
                 this.deleteOrder();
             }
         },
         openOrderDetails(id: number): void {
-            this.orderDetails = !this.orderDetails;
+            if (this.orderDetails) return;
+            this.orderDetails = true;
             this.orderId = id ? id : null;
         },
     },
@@ -134,15 +136,5 @@ export default defineComponent({
 .orders-list-leave-to {
     opacity: 0;
     transform: translateX(30px);
-}
-
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.25s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
 }
 </style>
