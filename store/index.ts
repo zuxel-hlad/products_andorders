@@ -4,6 +4,7 @@ export interface RootState {
     modal: boolean;
     deletedItem: null | DeletedItem;
     activeSessions: number;
+    mobileMenu: boolean;
 }
 
 export const useStore = defineStore('root', {
@@ -12,6 +13,7 @@ export const useStore = defineStore('root', {
             modal: false,
             deletedItem: null,
             activeSessions: 0,
+            mobileMenu: false,
         } as RootState;
     },
 
@@ -26,6 +28,9 @@ export const useStore = defineStore('root', {
         },
         setActiveSessions(count: number): void {
             this.activeSessions = count;
+        },
+        openMobileMenu() {
+            this.mobileMenu = !this.mobileMenu;
         },
     },
 });

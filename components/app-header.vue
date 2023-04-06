@@ -3,17 +3,27 @@ header.header
     .container.header-wrapper
         nuxt-link.header__logo.img-full(to='/')
             img(src='../assets/img/logo.png', alt='invertory logo')
+        button.header__burger(
+            type="button"
+            @click="openMobileMenu"
+            )
+            i.fa-sharp.fa-solid.fa-bars
         top-menu
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import topMenu from '~/components/top-menu.vue';
+import { useStore } from '~/store';
+import { mapActions} from 'pinia';
 
 export default defineComponent({
     name: 'app-header',
     components: {
         topMenu,
+    },
+    methods: {
+        ...mapActions(useStore, ['openMobileMenu']),
     },
 });
 </script>
@@ -34,6 +44,10 @@ export default defineComponent({
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @media screen and (max-width: 576px) {
+            align-items: flex-start;
+        }
     }
 
     &__logo {
@@ -42,6 +56,35 @@ export default defineComponent({
         width: 150px;
         height: 49px;
         margin-right: 152px;
+
+        @media screen and (max-width: 992px) {
+            margin-right: 15px;
+        }
+
+        @media screen and (max-width: 576px) {
+            width: 120px;
+            height: 40px;
+        }
+    }
+
+    &__burger {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        top: 55px;
+        left: 5px;
+        background: transparent;
+        border: none;
+        color: $dark;
+
+        @media screen and (max-width: 576px) {
+            display: flex;
+        }
     }
 }
 </style>

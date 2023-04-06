@@ -87,11 +87,13 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
 
     &__info {
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
+        flex-shrink: 0;
 
         &-date {
             margin-right: 20px;
@@ -139,7 +141,18 @@ export default defineComponent({
             &::placeholder {
                 color: $dark;
             }
+
+            @media screen and (max-width: 576px) {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
         }
+    }
+
+    @media screen and (max-width: 576px) {
+        max-width: 177px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
 }
 </style>
