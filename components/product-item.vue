@@ -254,7 +254,7 @@ export default defineComponent({
     }
 
     &_short {
-        min-width: 768px;
+        min-width: auto;
         justify-items: stretch;
         grid-template-columns: repeat(auto-fit, minmax(10px, auto));
         grid-template-rows: 1fr;

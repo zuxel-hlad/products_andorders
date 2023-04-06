@@ -20,14 +20,12 @@ section.orders
                         @view-details="orderId = order.id"
                     )
         h4.main-title(v-else) Приходів покищо немає.
-        .orders-wrapper__list(:class="{'orders-wrapper__list_active': orderDetails}")
-            order-details(
-                v-if="orderDetails"
-                :products="selectedOrderProducts"
-                @close-details="orderDetails = false"
-                @delete-product="deletedProductItem"
-                :selectedOrderId="orderId"
-            )
+        order-details(v-if="orderDetails"
+            :products="selectedOrderProducts"
+            @close-details="orderDetails = false"
+            @delete-product="deletedProductItem"
+            :selectedOrderId="orderId"
+        )
     app-modal(
         modalType="order"
         :titleType="orderDetails ? 'продукт' : 'прихід'"
@@ -142,16 +140,8 @@ export default defineComponent({
 
         &_with-list {
             animation: open-details 0.7s ease;
-            grid-template-columns: 465px 1fr;
+            grid-template-columns: minmax(360px, 465px) 1fr;
             gap: 15px;
-        }
-
-        &__list {
-            width: 0%;
-
-            &_active {
-                width: 100%;
-            }
         }
     }
 }

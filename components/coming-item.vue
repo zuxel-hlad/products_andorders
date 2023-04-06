@@ -58,9 +58,10 @@ export default defineComponent({
 .coming-item {
     padding: 10px 36px;
     display: grid;
-    grid-template-columns: 425px 131px 112px 122px 26px;
+    grid-template-columns: minmax(167px, 425px) 131px 112px minmax(40px, 122px) 26px;
     grid-template-rows: 1fr;
     grid-auto-rows: 1fr;
+    gap: 10px;
     justify-content: space-between;
     justify-items: start;
     align-items: center;

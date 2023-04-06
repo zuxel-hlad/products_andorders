@@ -98,6 +98,6 @@ export default defineComponent({
 .products-list-enter-from,
 .products-list-leave-to {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(30px) scale(0);
 }
 </style>

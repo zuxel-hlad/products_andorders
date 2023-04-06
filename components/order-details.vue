@@ -59,7 +59,7 @@ export default defineComponent({
     border-radius: 6px;
     background-color: $white;
     border: 1px solid $light-gray;
-    min-width: 770px;
+    min-width: 440px;
 
     &__empty {
         text-align: center;
@@ -145,13 +145,23 @@ export default defineComponent({
 }
 
 .details-list-enter-active,
-.details-list-leave-active {
-    will-change: transform;
-    transition: all 0.25s ease;
+.orders-list-leave-active {
+    transition: all 0.5s ease;
 }
+
 .details-list-enter-from,
 .details-list-leave-to {
     opacity: 0;
     transform: translateX(30px);
+    position: absolute;
+    overflow: hidden;
+}
+
+.details-list-enter-to,
+.details-list-leave {
+    opacity: 1;
+    transform: translateX(0);
+    position: static;
+    overflow: visible;
 }
 </style>
