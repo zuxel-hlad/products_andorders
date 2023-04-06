@@ -30,6 +30,9 @@ export const useStore = defineStore('root', {
             this.activeSessions = count;
         },
         openMobileMenu() {
+            if (this.modal) {
+                this.closeModal();
+            }
             this.mobileMenu = !this.mobileMenu;
         },
     },

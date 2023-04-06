@@ -94,6 +94,21 @@ export default defineComponent({
         &-option {
             width: 100%;
         }
+
+        @media screen and (max-width: 768px) {
+            padding-left: 0;
+            padding-top: 20px;
+            max-width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 </style>

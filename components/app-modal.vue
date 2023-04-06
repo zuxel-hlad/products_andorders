@@ -20,11 +20,11 @@
                 span.modal-content__product-text.wrap-text {{ deletedItem?.title }}
                 span.modal-content__product-text.modal-content__product-text_serial.wrap-text {{ deletedItem?.serialNumber }}
         .modal-content__buttons
-            button.modal-content__buttons-btn(
+            button.modal-content__buttons-btn.wrap-text(
                 type="button"
                 @click="$emit('cancel')"
                 ) Скасувати
-            button.modal-content__buttons-btn.modal-content__buttons-btn_delete(
+            button.modal-content__buttons-btn.wrap-text.modal-content__buttons-btn_delete(
                 type="button"
                 @click="$emit('delete')"
                 )
@@ -118,12 +118,24 @@ export default defineComponent({
             padding: 7px;
             cursor: pointer;
             box-shadow: 1px 1px 1px 0px $product-serial-color, 1px 1px 1px 0px $product-serial-color;
+
+            @media screen and (max-width: 414px) {
+                right: -3px;
+            }
         }
 
         &__title {
             font-size: 25px;
             font-weight: 500;
             padding: 32px 37px 40px 37px;
+
+            @media screen and (max-width: 768px) {
+                padding: 30px 15px;
+            }
+
+            @media screen and (max-width: 414px) {
+                font-size: 18px;
+            }
         }
 
         &__product {
@@ -163,9 +175,30 @@ export default defineComponent({
                 text-decoration-color: $text-border-color;
                 margin-bottom: 8px;
 
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
                 &_serial {
                     color: $product-serial-color;
                     margin-bottom: 0;
+                }
+
+                @media screen and (max-width: 414px) {
+                    font-size: 14px;
+                    line-height: 120%;
+                    margin-bottom: 5px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                padding: 15px;
+
+                &-status {
+                    margin-right: 15px;
+                }
+                &-img {
+                    margin-right: 15px;
                 }
             }
         }
@@ -176,6 +209,7 @@ export default defineComponent({
             display: flex;
             justify-content: flex-end;
             align-items: flex-start;
+            gap: 15px;
 
             &-btn {
                 font-family: 'Roboto', sans-serif;
@@ -191,11 +225,6 @@ export default defineComponent({
                 border-radius: 60px;
                 font-weight: 500;
                 transition: background-color 0.25s ease, color 0.25s ease;
-                margin-right: 15px;
-
-                &:last-child {
-                    margin-right: 0;
-                }
 
                 @media (any-hover: hover) {
                     &:hover {
@@ -223,8 +252,36 @@ export default defineComponent({
                         }
                     }
                 }
+
+                @media screen and (max-width: 768px) {
+                    padding: 12px;
+                    min-width: 150px;
+                }
+
+                @media screen and (max-width: 414px) {
+                    font-size: 12px;
+                    min-width: 120px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                padding: 30px 15px;
+                justify-content: space-between;
+                gap: 5px;
             }
         }
+
+        @media screen and (max-width: 992px) {
+            max-width: 90%;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        width: calc(100vw - 150px);
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 100vw;
     }
 }
 </style>

@@ -223,6 +223,7 @@ export default defineComponent({
             .navigation-menu__overlay {
                 visibility: visible;
                 opacity: 1;
+                z-index: 1;
             }
         }
     }
