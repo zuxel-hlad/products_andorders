@@ -21,25 +21,25 @@
                     :key="product.id" 
                     :product="product"
                     :selected="idx === seletedIdx + 1 && seletedIdx <= products.length"
+                    @delete-product="$emit('delete-product')"
              )
-    h4.main-title(v-else) Продуктів покищо немає.
-    
-
+    h4.main-title.details__empty(v-else) Продуктів покищо немає.
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useProductsStore } from '~/store/products';
-import { mapState } from 'pinia';
+import { Product } from '~/types/types';
 import productItem from '~/components/product-item.vue';
 export default defineComponent({
     name: 'order-details',
-    components: { productItem },
-    computed: {
-        ...mapState(useProductsStore, {
-            products: ({ transformedProducts }) => transformedProducts,
-        }),
+    props: {
+        products: {
+            type: Array as () => Product[],
+            required: true,
+            default: () => [],
+        },
     },
+    components: { productItem },
     data() {
         return {
             seletedIdx: 1,
@@ -53,6 +53,12 @@ export default defineComponent({
     border-radius: 6px;
     background-color: $white;
     border: 1px solid $light-gray;
+
+    &__empty {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
 
     &__header {
         padding: 33px 37px 18px;
@@ -125,7 +131,8 @@ export default defineComponent({
 
     &__list {
         max-width: 956px;
-        overflow-x: auto;
+        max-height: 400px;
+        overflow-y: auto;
     }
 }
 

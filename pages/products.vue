@@ -5,7 +5,10 @@ section
         :count="filteredProducts.length"
         :filter-options="filterOptions"
     )
-    app-list(v-if="filteredProducts.length")
+    app-list(
+        v-if="filteredProducts.length"
+        withOverflow
+        )
         transition-group(name="products-list")
             product-item(
                 v-for="product in filteredProducts" 

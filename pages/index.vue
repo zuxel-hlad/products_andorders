@@ -1,11 +1,11 @@
 <template lang="pug">
-section
+section.orders
     pageTitle(
         withButton
         titleText="Приходи"
         :counter="orders.length"
     )
-    .orders-wrapper(:class="{'orders-wrapper_with-details': orderDetails}")
+    .orders-wrapper
         app-list(v-if="orders.length")
             transition-group(name="orders-list")
                 coming-item(
@@ -18,10 +18,12 @@ section
                         @open-details="orderDetails = !orderDetails"
                     )
         h4.main-title(v-else) Приходів покищо немає.
-        transition
+        .orders-wrapper__list(:class="{'orders-wrapper__list_active': orderDetails}")
             order-details(
                 v-if="orderDetails"
+                :products="products"
                 @close-details="orderDetails = false"
+                @delete-product="() => {}"
                 )
     app-modal(
         titleType="прихід"
@@ -37,6 +39,7 @@ section
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useOrdersStore } from '~/store/orders';
+import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
 import { mapState, mapActions } from 'pinia';
 import { DeletedItem } from '~/types/types';
@@ -56,11 +59,14 @@ export default defineComponent({
     },
     data() {
         return {
-            orderDetails: true,
+            orderDetails: false,
         };
     },
     computed: {
         ...mapState(useStore, ['modal', 'deletedItem']),
+        ...mapState(useProductsStore, {
+            products: ({ transformedProducts }) => transformedProducts,
+        }),
         ...mapState(useOrdersStore, {
             orders: (store) => store.formattedProducts,
         }),
@@ -75,17 +81,22 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-.orders-wrapper {
-    padding-top: 52px;
-    max-width: 1440px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-auto-rows: 1fr;
+.orders {
+    overflow-x: hidden;
+    &-wrapper {
+        padding-top: 52px;
+        max-width: 1440px;
+        display: flex;
 
-    &_with-details {
-        gap: 15px;
-        grid-template-columns: minmax(300px, 467px) 1fr;
+        &__list {
+            padding-left: 15px;
+            width: 0%;
+            transition: 0.7s ease-in-out;
+
+            &_active {
+                width: 100%;
+            }
+        }
     }
 }
 

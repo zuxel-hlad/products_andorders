@@ -2,7 +2,7 @@
 .coming-item(
     :class="{'coming-item_short': isShort}"
 )
-    nuxt-link(:to="`/order-${order?.id}`").coming-item__coming-name {{ order.title ? order.title : '-' }}
+    span.coming-item__coming-name {{ order.title ? order.title : '-' }}
     .coming-item__products
         button.coming-item__products-btn(
             type="button"
@@ -24,7 +24,8 @@
         @click="$emit('delete-coming')"
         )
         i.fa-regular.fa-trash-can
-
+    button.coming-item__details
+        i.fa-solid.fa-chevron-right
 </template>
 
 <script lang="ts">
@@ -50,7 +51,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .coming-item {
     padding: 10px 36px;
-    width: 100%;
     display: grid;
     grid-template-columns: 425px 131px 112px 122px 26px;
     grid-template-rows: 1fr;
@@ -62,7 +62,7 @@ export default defineComponent({
     border: 1px solid $light-gray;
     border-radius: 6px;
     padding: 10px 23px 10px 36px;
-    transition: box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease, width 0.5s ease;
     cursor: pointer;
 
     @media (any-hover: hover) {
@@ -73,7 +73,6 @@ export default defineComponent({
 
     &__coming-name {
         display: block;
-        text-decoration: none;
         font-size: 16px;
         color: $product-date-color;
         text-align: left;
@@ -182,10 +181,29 @@ export default defineComponent({
         }
     }
 
+    &__details {
+        position: absolute;
+        width: 40px;
+        top: 0;
+        right: -40px;
+        bottom: 0;
+        background-color: $light-gray;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        font-size: 16px;
+        transition: right 0.25s;
+        cursor: pointer;
+    }
+
     &_short {
+        overflow: hidden;
         grid-template-columns: 130px 1fr;
         gap: 40px;
         position: relative;
+        padding: 10px 40px 10px 36px;
 
         .coming-item__coming-name {
             display: none;
@@ -202,6 +220,14 @@ export default defineComponent({
         .coming-item__coming-date {
             flex-direction: column;
             align-items: flex-start;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                .coming-item__details {
+                    right: 0;
+                }
+            }
         }
     }
 }

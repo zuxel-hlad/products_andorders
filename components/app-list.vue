@@ -1,5 +1,5 @@
 <template lang="pug">
-.app-list(:class="customClass")
+.app-list(:class="{'app-list_with-overflow': withOverflow}")
     slot
 </template>
 
@@ -8,10 +8,10 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'coming-list',
     props: {
-        customClass: {
-            type: String,
+        withOverflow: {
+            type: Boolean,
             required: false,
-            default: '',
+            default: false,
         },
     },
 });
@@ -22,11 +22,12 @@ export default defineComponent({
     width: 100%;
     max-width: 1440px;
     padding-bottom: 21px;
-    overflow: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-auto-rows: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+
+    &_with-overflow {
+        overflow-x: auto;
+    }
 }
 </style>
