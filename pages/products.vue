@@ -83,9 +83,7 @@ export default defineComponent({
         },
     },
     mounted() {
-        setTimeout(() => {
-            addDeltaXScroll('.app-list');
-        }, 300);
+        addDeltaXScroll('.app-list');
     },
     beforeUnmount() {
         removeDeltaXScroll('.app-list');

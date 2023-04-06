@@ -1,31 +1,32 @@
 export const addDeltaXScroll = (element: string) => {
-    const scrollableContainer = document.querySelector(element) as HTMLElement;
-    
-    if (scrollableContainer) {
-        if (!scrollableContainer) return;
-        let isMouseDown = false;
-        let startX: number;
-        const handleMousedown = (event: MouseEvent) => {
-            isMouseDown = true;
-            startX = event.clientX;
-        };
-        const handleMouseup = () => {
-            isMouseDown = false;
-        };
-
-        const handleMousemove = (event: MouseEvent) => {
-            if (isMouseDown) {
-                let deltaX = startX - event.clientX;
-                scrollableContainer.scrollLeft += deltaX;
+    setTimeout(() => {
+        const scrollableContainer = document.querySelector(element) as HTMLElement;
+        if (scrollableContainer) {
+            if (!scrollableContainer) return;
+            let isMouseDown = false;
+            let startX: number;
+            const handleMousedown = (event: MouseEvent) => {
+                isMouseDown = true;
                 startX = event.clientX;
-            }
-        };
-        scrollableContainer.addEventListener('mousedown', handleMousedown);
+            };
+            const handleMouseup = () => {
+                isMouseDown = false;
+            };
 
-        document.addEventListener('mouseup', handleMouseup);
+            const handleMousemove = (event: MouseEvent) => {
+                if (isMouseDown) {
+                    let deltaX = startX - event.clientX;
+                    scrollableContainer.scrollLeft += deltaX;
+                    startX = event.clientX;
+                }
+            };
+            scrollableContainer.addEventListener('mousedown', handleMousedown);
 
-        scrollableContainer.addEventListener('mousemove', handleMousemove);
-    }
+            document.addEventListener('mouseup', handleMouseup);
+
+            scrollableContainer.addEventListener('mousemove', handleMousemove);
+        }
+    }, 300);
 };
 
 export const removeDeltaXScroll = (element: string) => {
