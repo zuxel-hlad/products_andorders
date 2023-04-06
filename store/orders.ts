@@ -1,4 +1,4 @@
-import { orders } from './mock-data';
+import { orders, products } from './mock-data';
 import { defineStore } from 'pinia';
 import { Order } from '~/types/types';
 import { DeletedItem } from '../types/types';
@@ -22,6 +22,9 @@ export const useOrdersStore = defineStore('orders', {
         formattedProducts(state) {
             return state.orders.map((order) => ({
                 ...order,
+                get products() {
+                    return order.products.filter((product) => product.order === order.id);
+                },
                 shortDate: transformDate(order.date, true),
                 date: transformDate(order.date, false),
                 totalSumUSD: `${calcTotalProductsPrice(order.products, 'usd')} $`,
