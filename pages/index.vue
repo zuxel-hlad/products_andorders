@@ -23,16 +23,16 @@ section.orders
                 v-if="orderDetails"
                 :products="products"
                 @close-details="orderDetails = false"
-                @delete-product="() => {}"
+                @delete-product="deletedProductItem"
                 )
     app-modal(
-        titleType="прихід"
         modalType="order"
+        :titleType="orderDetails ? 'продукт' : 'прихід'"
         :visibility="modal"
         :deletedItem="deletedItem"
         @close-modal="closeModal"
         @cancel="closeModal"
-        @delete="deleteOrder"
+        @delete="checkDeleteItemFunctionType"
     )
 </template>
 
@@ -74,8 +74,19 @@ export default defineComponent({
     methods: {
         ...mapActions(useStore, ['openModal', 'closeModal']),
         ...mapActions(useOrdersStore, ['deleteOrder']),
+        ...mapActions(useProductsStore, ['deleteProduct']),
         deleteOrderItem(deletedObj: DeletedItem): void {
             this.openModal(deletedObj);
+        },
+        deletedProductItem({ id, serialNumber, title }: DeletedItem): void {
+            this.openModal({ id, serialNumber, title });
+        },
+        checkDeleteItemFunctionType() {
+            if (this.orderDetails) {
+                this.deleteProduct();
+            } else {
+                this.deleteOrder();
+            }
         },
     },
 });

@@ -21,7 +21,7 @@
                     :key="product.id" 
                     :product="product"
                     :selected="idx === seletedIdx + 1 && seletedIdx <= products.length"
-                    @delete-product="$emit('delete-product')"
+                    @delete-product="$emit('delete-product',product)"
              )
     h4.main-title.details__empty(v-else) Продуктів покищо немає.
 </template>
@@ -133,6 +133,7 @@ export default defineComponent({
         max-width: 956px;
         max-height: 400px;
         overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 
