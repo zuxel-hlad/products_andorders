@@ -14,14 +14,15 @@
         button.details__add-product(type="button") Додати продукт
             i.fa-solid.fa-plus
     .details__list(v-if="products.length")
-        product-item(
-                v-for="(product) in products" 
-                isShort
-                :key="product.id" 
-                :product="product"
-                :selected="false"
-                @delete-product="$emit('delete-product',product)"
-            )
+        transition-group(name="details-list")
+            product-item(
+                    v-for="(product) in products" 
+                    isShort
+                    :key="product.id" 
+                    :product="product"
+                    :selected="false"
+                    @delete-product="$emit('delete-product',product)"
+                )
     h4.main-title.details__empty(v-else) Продуктів покищо немає.
 </template>
 
@@ -136,7 +137,7 @@ export default defineComponent({
     }
 
     &__list {
-        max-width: 956px;
+        max-width: 958px;
         max-height: 400px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -145,11 +146,12 @@ export default defineComponent({
 
 .details-list-enter-active,
 .details-list-leave-active {
-    transition: all 0.5s ease;
+    will-change: transform;
+    transition: all 0.25s ease;
 }
 .details-list-enter-from,
 .details-list-leave-to {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateX(30px);
 }
 </style>

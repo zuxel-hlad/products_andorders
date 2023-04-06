@@ -5,7 +5,7 @@ section.orders
         titleText="Приходи"
         :counter="orders.length"
     )
-    .orders-wrapper
+    .orders-wrapper(:class="{'orders-wrapper_with-list': orderDetails}")
         app-list(v-if="orders.length")
             transition-group(name="orders-list")
                 coming-item(
@@ -27,7 +27,7 @@ section.orders
                 @close-details="orderDetails = false"
                 @delete-product="deletedProductItem"
                 :selectedOrderId="orderId"
-                )
+            )
     app-modal(
         modalType="order"
         :titleType="orderDetails ? 'продукт' : 'прихід'"
@@ -101,25 +101,54 @@ export default defineComponent({
             }
         },
         openOrderDetails(id: number): void {
-            if (this.orderDetails) return;
-            this.orderDetails = true;
+            this.orderDetails = !this.orderDetails;
             this.orderId = id ? id : null;
         },
     },
 });
 </script>
 <style scoped lang="scss">
+@keyframes open-details {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes reverse-open-details {
+    from {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
 .orders {
     overflow-x: hidden;
+
     &-wrapper {
         padding-top: 52px;
         max-width: 1440px;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-auto-rows: 1fr;
+        animation: reverse-open-details 0.7s ease;
+
+        &_with-list {
+            animation: open-details 0.7s ease;
+            grid-template-columns: 465px 1fr;
+            gap: 15px;
+        }
 
         &__list {
-            padding-left: 15px;
             width: 0%;
-            transition: 0.7s ease-in-out;
 
             &_active {
                 width: 100%;

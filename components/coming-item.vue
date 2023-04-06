@@ -1,5 +1,6 @@
 <template lang="pug">
 .coming-item(
+    @click="$emit('view-details')"
     :class="{'coming-item_short': isShort, 'coming-item_selected': isShort && selected}"
 )
     span.coming-item__coming-name {{ order.title ? order.title : '-' }}
@@ -24,7 +25,7 @@
         @click="$emit('delete-coming')"
         )
         i.fa-regular.fa-trash-can
-    button.coming-item__details(@click="$emit('view-details')")
+    button.coming-item__details
         i.fa-solid.fa-chevron-right
 </template>
 
@@ -67,7 +68,7 @@ export default defineComponent({
     border: 1px solid $light-gray;
     border-radius: 6px;
     padding: 10px 23px 10px 36px;
-    transition: box-shadow 0.25s ease, width 0.5s ease;
+    transition: box-shadow 0.25s ease;
     cursor: pointer;
 
     @media (any-hover: hover) {
@@ -201,6 +202,7 @@ export default defineComponent({
         font-size: 16px;
         transition: right 0.25s;
         cursor: pointer;
+        display: none;
     }
 
     &_short {
@@ -230,6 +232,7 @@ export default defineComponent({
         @media (any-hover: hover) {
             &:hover {
                 .coming-item__details {
+                    display: block;
                     right: 0;
                 }
             }
@@ -238,6 +241,7 @@ export default defineComponent({
 
     &_selected {
         .coming-item__details {
+            display: block;
             right: 0;
         }
     }

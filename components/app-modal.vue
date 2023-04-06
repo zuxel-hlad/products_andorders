@@ -98,6 +98,7 @@ export default defineComponent({
     &-content {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         position: relative;
         flex: 1 1 auto;
         max-width: 791px;
@@ -133,6 +134,7 @@ export default defineComponent({
             justify-content: flex-start;
             align-items: center;
             flex-grow: 1;
+            min-height: 68px;
 
             &-status {
                 width: 10px;
