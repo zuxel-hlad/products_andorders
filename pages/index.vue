@@ -77,6 +77,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .orders-wrapper {
     padding-top: 52px;
+    max-width: 1440px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -84,7 +85,7 @@ export default defineComponent({
 
     &_with-details {
         gap: 15px;
-        grid-template-columns: minmax(300px, 400px) 1fr;
+        grid-template-columns: minmax(300px, 467px) 1fr;
     }
 }
 

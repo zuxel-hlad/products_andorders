@@ -13,12 +13,38 @@
         h4.details__title Дуже дуже придуже дліннюча назва дліннючого приходу
         button.details__add-product(type="button") Додати продукт
             i.fa-solid.fa-plus
+    .details__list(v-if="products.length")
+        transition-group(name="details-list")
+            product-item(
+                    v-for="(product, idx) in products" 
+                    isShort
+                    :key="product.id" 
+                    :product="product"
+                    :selected="idx === seletedIdx + 1 && seletedIdx <= products.length"
+             )
+    h4.main-title(v-else) Продуктів покищо немає.
+    
+
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useProductsStore } from '~/store/products';
+import { mapState } from 'pinia';
+import productItem from '~/components/product-item.vue';
 export default defineComponent({
     name: 'order-details',
+    components: { productItem },
+    computed: {
+        ...mapState(useProductsStore, {
+            products: ({ transformedProducts }) => transformedProducts,
+        }),
+    },
+    data() {
+        return {
+            seletedIdx: 1,
+        };
+    },
 });
 </script>
 
@@ -96,5 +122,20 @@ export default defineComponent({
             }
         }
     }
+
+    &__list {
+        max-width: 956px;
+        overflow-x: auto;
+    }
+}
+
+.details-list-enter-active,
+.details-list-leave-active {
+    transition: all 0.5s ease;
+}
+.details-list-enter-from,
+.details-list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>

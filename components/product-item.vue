@@ -1,5 +1,5 @@
 <template lang="pug">
-.product-item
+.product-item(:class="itemStyleClass")
     .product-item__available(
         :class="{'product-item__available_available': product.available}"
     )
@@ -30,8 +30,8 @@
                 ) {{ price.label}}
         span.product-item__prices-uah(v-else) -
     span.product-item__group-name.wrap-text {{ product.group ? product.group : '-' }}
-    span.product-item__text.wrap-text {{ product.executor ? product.executor : '-' }}
-    span.product-item__text.wrap-text {{ product.comingName ? product.comingName : '-' }}
+    span.product-item__text.wrap-text.executor {{ product.executor ? product.executor : '-' }}
+    span.product-item__text.coming-name.wrap-text {{ product.comingName ? product.comingName : '-' }}
     .product-item__coming-date 
         span.date-short {{ product.shortDate ? product.shortDate : '-' }}
         span.date-full {{ product.date ? product.date : '-' }}
@@ -54,6 +54,24 @@ export default defineComponent({
             type: Object as () => Product,
             required: true,
             default: () => {},
+        },
+        isShort: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        selected: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+    },
+    computed: {
+        itemStyleClass() {
+            return {
+                'product-item_short': this.isShort,
+                'product-item_selected': this.selected && this.isShort,
+            };
         },
     },
 });
@@ -80,7 +98,7 @@ export default defineComponent({
     cursor: pointer;
 
     @media (any-hover: hover) {
-        &:hover {
+        &:hover:not(.product-item_short) {
             box-shadow: 7px 7px 11px 0px $product-serial-color;
         }
     }
@@ -233,6 +251,36 @@ export default defineComponent({
                 color: $dark;
             }
         }
+    }
+
+    &_short {
+        min-width: 768px;
+        justify-items: stretch;
+        grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+        grid-template-rows: 1fr;
+        gap: 15px;
+        .product-item__status-dates,
+        .product-item__state,
+        .product-item__prices,
+        .product-item__group-name,
+        .product-item__text.executor,
+        .product-item__text.coming-name,
+        .product-item__coming-date {
+            display: none;
+        }
+        .product-item__status-status {
+            margin-right: 0;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                box-shadow: 0px 22px 24px -17px $product-serial-color inset;
+            }
+        }
+    }
+
+    &_selected {
+        box-shadow: 0px 22px 24px -17px $product-serial-color inset;
     }
 }
 </style>
