@@ -28,6 +28,7 @@ export const useProductsStore = defineStore('products', {
                     })),
                     guarantee: {
                         start: transformDate(product.guarantee.start, false),
+                        // start: transformDate(product.guarantee.start, false),
                         end: transformDate(product.guarantee.end, false),
                     },
                     shortDate: transformDate(product.date, true),

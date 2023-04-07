@@ -77,8 +77,8 @@ export const products = [
         photo: 'img1',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
         type: {
-            type: 'monitors',
-            label: 'Монітори',
+            type: 'fridges',
+            label: 'Холодильники',
         },
         specification: 'Specification 1',
         guarantee: {
@@ -105,8 +105,8 @@ export const products = [
         photo: 'img1',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
         type: {
-            type: 'monitors',
-            label: 'Монітори',
+            type: 'washing_machines',
+            label: 'Пральні машини',
         },
         specification: 'Specification 1',
         guarantee: {
@@ -133,8 +133,8 @@ export const products = [
         photo: 'img2',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
         type: {
-            type: 'videocards',
-            label: 'Відеокарти',
+            type: 'mouses',
+            label: 'Мишки',
         },
         specification: 'Specification 2',
         guarantee: {
@@ -245,8 +245,8 @@ export const products = [
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
         type: {
-            type: 'motherboards',
-            label: 'Материнські плати',
+            type: 'fridges',
+            label: 'Холодильники',
         },
         specification: 'Specification 3',
         guarantee: {
@@ -357,8 +357,8 @@ export const products = [
         photo: 'img3',
         title: 'Gigabyte Technology X58-USB3 (Socket 1366) 6 X58-USB3',
         type: {
-            type: 'harddisk',
-            label: 'Жорсткі диски',
+            type: 'mouses',
+            label: 'Мишки',
         },
         specification: 'Specification 3',
         guarantee: {
