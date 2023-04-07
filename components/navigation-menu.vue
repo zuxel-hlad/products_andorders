@@ -83,7 +83,6 @@ export default defineComponent({
 .navigation-menu {
     padding: 122px 12px 12px;
     width: 197px;
-    min-height: 100vh;
     height: calc(100 * var(--vh-menu));
     display: flex;
     flex-direction: column;
@@ -176,7 +175,7 @@ export default defineComponent({
         }
 
         @media screen and (max-width: 576px) {
-            padding: 15px;
+            padding: 10px;
         }
 
         &-text {
