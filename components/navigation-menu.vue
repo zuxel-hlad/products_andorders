@@ -11,11 +11,12 @@ aside.navigation-menu(:class="{'navigation-menu_active': mobileMenu}")
             @click="$router.push('/profile')"
         )
             i.fa-sharp.fa-solid.fa-gear
+    
     nuxt-link.navigation-menu__link(
         v-for='{ to, name, id, iconClassname } in links',
         :class="{'router-link-exact-active': $route.path.includes('order') && to === '/'}"
-        :key='id', 
-        :to='to'
+        :key='id',
+        :to='customLocalePath(to)'
         )
         span.navigation-menu__link-text.wrap-text {{ name }}
             i(:class="iconClassname")
@@ -31,31 +32,31 @@ export default defineComponent({
         return {
             links: [
                 {
-                    name: 'Прихід',
+                    name: this.$t('aside.coming'),
                     to: '/',
                     id: 1,
                     iconClassname: 'fa-solid fa-right-to-bracket',
                 },
                 {
-                    name: 'Групи',
+                    name: this.$t('aside.groups'),
                     to: '/groups',
                     id: 2,
                     iconClassname: 'fa-sharp fa-solid fa-layer-group',
                 },
                 {
-                    name: 'Продукти',
+                    name: this.$t('aside.products'),
                     to: '/products',
                     id: 3,
                     iconClassname: 'fa-sharp fa-solid fa-boxes-stacked',
                 },
                 {
-                    name: 'Користувачі',
+                    name: this.$t('aside.users'),
                     to: '/users',
                     id: 4,
                     iconClassname: 'fa-solid fa-users',
                 },
                 {
-                    name: 'Налаштування',
+                    name: this.$t('aside.settings'),
                     to: '/settings',
                     id: 5,
                     iconClassname: 'fa-sharp fa-solid fa-wrench',
@@ -69,12 +70,15 @@ export default defineComponent({
     watch: {
         $route() {
             if (!this.mobileMenu) return;
-            console.log('works');
             this.openMobileMenu();
         },
     },
     methods: {
         ...mapActions(useStore, ['openMobileMenu']),
+        customLocalePath(path: string): string {
+            //@ts-ignore
+            return this.localePath(path);
+        },
     },
 });
 </script>

@@ -15,7 +15,7 @@ header.header
 import { defineComponent } from 'vue';
 import topMenu from '~/components/top-menu.vue';
 import { useStore } from '~/store';
-import { mapActions} from 'pinia';
+import { mapActions } from 'pinia';
 
 export default defineComponent({
     name: 'app-header',

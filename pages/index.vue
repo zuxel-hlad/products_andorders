@@ -2,7 +2,7 @@
 section.orders
     pageTitle(
         withButton
-        titleText="Приходи"
+        :titleText="$t('aside.coming')"
         :counter="orders.length"
     )
     .orders-wrapper(:class="{'orders-wrapper_with-list': orderDetails}")

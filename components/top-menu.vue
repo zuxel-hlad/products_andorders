@@ -3,15 +3,17 @@
     form.top-menu__search
         input.top-menu__search-input(
             type="text" 
-            placeholder="Пошук" 
+            :placeholder="$t('header.search') " 
             name="search"
         )
+        button(@click.prevent="$i18n.setLocale('ua')" type="button") ua
+        button(@click.prevent="$i18n.setLocale('en')" type="button") en
     .top-menu__info
         .top-menu__info-date
             span.top-menu__info-text {{ today }}
             span.top-menu__info-text {{ todayDate }}
         .top-menu__info-clock(
-            :title="`Зараз: ${time}`"
+            :title="`${$t('header.now')} ${time}`"
             )
             span.top-menu__info-text
                 .clock-icon.img-full
@@ -20,7 +22,7 @@
                         alt="clock icon"
                     )
                 | {{ time }}
-            span.top-menu__info-text(title="Користувачів у системі")
+            span.top-menu__info-text(:title="`${$t('header.users')} ${activeSessions}`")
                 i.fa-sharp.fa-solid.fa-users
                 |&nbsp;&nbsp; {{ activeSessions }}
 </template>
@@ -40,13 +42,16 @@ export default defineComponent({
     computed: {
         ...mapState(useStore, ['activeSessions']),
         today() {
-            const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'];
+            const daysOfWeekUA = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'];
+            const daysOfWeekEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const daysOfWeek = this.$i18n.locale === 'ua' ? daysOfWeekUA : daysOfWeekEN;
             const date = new Date();
             const dayOfWeek = daysOfWeek[date.getDay()];
             return dayOfWeek;
         },
         todayDate() {
-            const monthsOfWeek = [
+            const monthsOfWeekEN = ['Jan', 'Feb', 'Ma', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            const monthsOfWeekUA = [
                 'Січ',
                 'Лют',
                 'Берез',
@@ -60,6 +65,7 @@ export default defineComponent({
                 'Лист',
                 'Груд',
             ];
+            const monthsOfWeek = this.$i18n.locale === 'ua' ? monthsOfWeekUA : monthsOfWeekEN;
             const date = new Date();
             const todayDate = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
             const dateString = `${todayDate} ${monthsOfWeek[date.getMonth()]}, ${date.getFullYear()}`;
@@ -67,6 +73,7 @@ export default defineComponent({
         },
     },
     created() {
+        console.log(this.$i18n.locale);
         this.updateTime();
         setInterval(this.updateTime, 1000);
     },

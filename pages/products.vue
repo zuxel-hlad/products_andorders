@@ -1,7 +1,7 @@
 <template lang="pug">
 section.products
     comingBar(
-        title-text="Продукти"
+        :title-text="$t('aside.products')"
         :count="filteredProducts.length"
         :filter-options="filterOptions"
     )
@@ -91,7 +91,6 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-
 .products-list-move,
 .products-list-enter-active,
 .products-list-leave-active {

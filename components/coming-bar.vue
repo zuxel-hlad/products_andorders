@@ -4,12 +4,12 @@
         :titleText="titleText" 
         :counter="count")
     label.coming-bar__select
-        span.coming-bar__select-label Тип:
+        span.coming-bar__select-label {{ $t('filter.label') }}
         select.coming-bar__select-select(
             @input="setFilter"
             name="product-type"
         )
-            option(value="all" selected) Усі
+            option(value="all" selected) {{ $t('filter.default') }}
             template(v-if="filterOptions.length")
                 option.coming-bar__select-option(
                     v-for="({type, label}, idx) in filterOptions"
@@ -19,7 +19,7 @@
             option.coming-bar__select-option(
                 v-else
                 value=""
-            ) Поки немає фільрів.
+            ) {{ $t('filter.empty') }}
 </template>
 
 <script lang="ts">
