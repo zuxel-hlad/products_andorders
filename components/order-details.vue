@@ -74,12 +74,21 @@ export default defineComponent({
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+
+        @media screen and (max-width: 992px) {
+            padding: 20px 15px;
+        }
     }
 
     &__title {
         font-size: 25px;
         font-weight: 500;
         margin-bottom: 25px;
+
+        @media screen and (max-width: 992px) {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
     }
 
     &__close {
@@ -94,6 +103,10 @@ export default defineComponent({
         padding: 7px;
         cursor: pointer;
         box-shadow: 3px 4px 9px 1px $product-serial-color, 1px 1px 1px 0px $product-serial-color;
+
+        @media screen and (max-width: 992px) {
+            right: -3px;
+        }
     }
 
     &__add-product {
@@ -134,6 +147,10 @@ export default defineComponent({
                 color: $product-date-color;
             }
         }
+
+        @media screen and (max-width: 992px) {
+            font-size: 16px;
+        }
     }
 
     &__list {
@@ -141,6 +158,13 @@ export default defineComponent({
         max-height: 400px;
         overflow-y: auto;
         overflow-x: hidden;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    @media screen and (max-width: 992px) {
+        width: auto;
+        min-width: auto;
     }
 }
 
@@ -155,6 +179,10 @@ export default defineComponent({
     transform: translateX(30px);
     position: absolute;
     overflow: hidden;
+
+    @media screen and (max-width: 414px) {
+        position: static;
+    }
 }
 
 .details-list-enter-to,

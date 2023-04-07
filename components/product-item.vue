@@ -309,6 +309,17 @@ export default defineComponent({
                 box-shadow: 0px 22px 24px -17px $product-serial-color inset;
             }
         }
+        @media screen and (max-width: 992px) {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .product-item__delete {
+                margin: 0 auto;
+                padding: 15px;
+            }
+        }
     }
 }
 </style>

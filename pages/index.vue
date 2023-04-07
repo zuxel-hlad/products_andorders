@@ -49,6 +49,7 @@ import appList from '~/components/app-list.vue';
 import comingItem from '~/components/coming-item.vue';
 import appModal from '~/components/app-modal.vue';
 import orderDetails from '~/components/order-details.vue';
+
 export default defineComponent({
     name: 'home',
     components: {
@@ -142,6 +143,22 @@ export default defineComponent({
             animation: open-details 0.7s ease;
             grid-template-columns: minmax(360px, 465px) 1fr;
             gap: 15px;
+
+            @media screen and (max-width: 1200px) {
+                grid-template-columns: minmax(200px, 360px) 1fr;
+            }
+
+            @media screen and (max-width: 992px) {
+                grid-template-columns: minmax(200px, 30%) 1fr;
+            }
+
+            @media screen and (max-width: 768px) {
+                display: flex;
+                gap: 10px;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
         }
     }
 }

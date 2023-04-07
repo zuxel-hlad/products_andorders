@@ -253,6 +253,24 @@ export default defineComponent({
                 }
             }
         }
+
+        @media screen and (max-width: 1200px) {
+            padding: 10px;
+            gap: 15px;
+            .coming-item__coming-date .date-full {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            align-items: flex-start;
+        }
+
+        @media screen and (max-width: 768px) {
+            .coming-item__details i {
+                transform: rotate(-90deg);
+            }
+        }
     }
 
     &_selected {
