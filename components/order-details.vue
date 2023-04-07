@@ -155,11 +155,14 @@ export default defineComponent({
 
     &__list {
         max-width: 958px;
-        max-height: 400px;
+        max-height: auto;
         overflow-y: auto;
         overflow-x: hidden;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
+        &::-webkit-scrollbar {
+            width: 1px;
+        }
     }
 
     @media screen and (max-width: 992px) {
@@ -168,8 +171,9 @@ export default defineComponent({
     }
 }
 
+.details-list-move,
 .details-list-enter-active,
-.orders-list-leave-active {
+.details-list-leave-active {
     transition: all 0.5s ease;
 }
 
@@ -177,19 +181,9 @@ export default defineComponent({
 .details-list-leave-to {
     opacity: 0;
     transform: translateX(30px);
-    position: absolute;
-    overflow: hidden;
-
-    @media screen and (max-width: 576px) {
-        position: static;
-    }
 }
 
-.details-list-enter-to,
-.details-list-leave {
-    opacity: 1;
-    transform: translateX(0);
-    position: static;
-    overflow: visible;
+.details-list-leave-active {
+    position: absolute;
 }
 </style>

@@ -91,13 +91,20 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+
+.products-list-move,
 .products-list-enter-active,
 .products-list-leave-active {
     transition: all 0.5s ease;
 }
+
 .products-list-enter-from,
 .products-list-leave-to {
     opacity: 0;
-    transform: translateX(30px) scale(0);
+    transform: translateX(30px);
+}
+
+.products-list-leave-active {
+    position: absolute;
 }
 </style>

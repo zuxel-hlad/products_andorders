@@ -28,6 +28,7 @@ export default defineComponent({
 
     &_with-overflow {
         overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 </style>
