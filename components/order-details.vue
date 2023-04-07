@@ -180,7 +180,7 @@ export default defineComponent({
     position: absolute;
     overflow: hidden;
 
-    @media screen and (max-width: 414px) {
+    @media screen and (max-width: 576px) {
         position: static;
     }
 }
