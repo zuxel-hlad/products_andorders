@@ -155,6 +155,11 @@ export default defineComponent({
             &_free {
                 color: $main-green-color;
             }
+
+            @media screen and (max-width: 576px) {
+                text-align: left;
+                margin-right: 0;
+            }
         }
 
         &-dates {
@@ -172,6 +177,13 @@ export default defineComponent({
                     color: $product-date-color;
                 }
             }
+        }
+
+        @media screen and (max-width: 576px) {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 
@@ -232,6 +244,12 @@ export default defineComponent({
             font-size: 16px;
             color: $product-date-color;
         }
+
+        @media screen and (max-width: 576px) {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
     }
 
     &__delete {
@@ -251,6 +269,20 @@ export default defineComponent({
                 color: $dark;
             }
         }
+
+        @media screen and (max-width: 576px) {
+            margin: 0 auto;
+            padding: 15px;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 15px;
     }
 
     &_short {
