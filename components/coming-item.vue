@@ -83,8 +83,9 @@ export default defineComponent({
         font-size: 16px;
         color: $product-date-color;
         text-align: left;
-        border-bottom: 1px solid $product-date-color;
-        padding-bottom: 1px;
+        text-decoration-color: $product-date-color;
+        text-decoration: underline;
+        position: relative;
         transition: color 0.25s;
 
         @media (any-hover: hover) {
@@ -150,6 +151,12 @@ export default defineComponent({
             font-size: 16px;
             color: $product-date-color;
         }
+
+        @media screen and (max-width: 992px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     &__prices {
@@ -166,6 +173,10 @@ export default defineComponent({
         &-uah {
             font-size: 16px;
             color: $dark;
+        }
+
+        @media screen and (max-width: 992px) {
+            text-align: center;
         }
     }
 
@@ -185,6 +196,10 @@ export default defineComponent({
             &:hover {
                 color: $dark;
             }
+        }
+
+        @media screen and (max-width: 992px) {
+            padding: 15px;
         }
     }
 
@@ -245,6 +260,13 @@ export default defineComponent({
             display: block;
             right: 0;
         }
+    }
+
+    @media screen and (max-width: 992px) {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 }
 </style>

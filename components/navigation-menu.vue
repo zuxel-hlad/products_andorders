@@ -40,7 +40,7 @@ export default defineComponent({
                     name: 'Групи',
                     to: '/groups',
                     id: 2,
-                    iconClassname: 'fa-solid fa-people-group',
+                    iconClassname: 'fa-sharp fa-solid fa-layer-group',
                 },
                 {
                     name: 'Продукти',
@@ -52,7 +52,7 @@ export default defineComponent({
                     name: 'Користувачі',
                     to: '/users',
                     id: 4,
-                    iconClassname: 'fa-solid fa-users-line',
+                    iconClassname: 'fa-solid fa-users',
                 },
                 {
                     name: 'Налаштування',
@@ -65,6 +65,13 @@ export default defineComponent({
     },
     computed: {
         ...mapState(useStore, ['mobileMenu']),
+    },
+    watch: {
+        $route() {
+            if (!this.mobileMenu) return;
+            console.log('works');
+            this.openMobileMenu();
+        },
     },
     methods: {
         ...mapActions(useStore, ['openMobileMenu']),
@@ -198,6 +205,7 @@ export default defineComponent({
                 i {
                     display: block;
                     font-size: 25px;
+                    padding-bottom: 2px;
                 }
             }
         }

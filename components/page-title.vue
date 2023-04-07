@@ -79,12 +79,21 @@ export default defineComponent({
         &:active::before {
             background-color: $main-green-color;
         }
+
+        @media screen and (max-width: 768px) {
+            width: 28px;
+            height: 28px;
+        }
     }
     &_with-button {
         padding-left: 62px;
 
         .page-title__button {
             display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding-left: 42px;
         }
     }
 }
