@@ -11,7 +11,15 @@ aside.navigation-menu(:class="{'navigation-menu_active': mobileMenu}")
             @click="$router.push('/profile')"
         )
             i.fa-sharp.fa-solid.fa-gear
-    
+    label.navigation-menu__langs
+        i.fa-solid.fa-earth-americas
+        select.navigation-menu__langs-select(@change="setLang")
+            option(
+                v-for="{label, name, id} in langs"
+                :key="id"
+                :value="name"
+                :selected="currentLang === name"
+            ) {{ label }}
     nuxt-link.navigation-menu__link(
         v-for='{ to, name, id, iconClassname } in links',
         :class="{'router-link-exact-active': $route.path.includes('order') && to === '/'}"
@@ -26,6 +34,7 @@ aside.navigation-menu(:class="{'navigation-menu_active': mobileMenu}")
 import { useStore } from '~/store';
 import { mapState, mapActions } from 'pinia';
 import { defineComponent } from 'vue';
+
 export default defineComponent({
     name: 'navigation-menu',
     data() {
@@ -62,10 +71,25 @@ export default defineComponent({
                     iconClassname: 'fa-sharp fa-solid fa-wrench',
                 },
             ],
+            langs: [
+                {
+                    label: 'ua',
+                    name: 'ua',
+                    id: 4,
+                },
+                {
+                    label: 'en',
+                    name: 'en',
+                    id: 5,
+                },
+            ],
         };
     },
     computed: {
         ...mapState(useStore, ['mobileMenu']),
+        currentLang(): string {
+            return this.$i18n.locale;
+        },
     },
     watch: {
         $route() {
@@ -78,6 +102,12 @@ export default defineComponent({
         customLocalePath(path: string): string {
             //@ts-ignore
             return this.localePath(path);
+        },
+        setLang(event: Event): void {
+            const { value: lang } = event.target as HTMLInputElement;
+            const isSlash = window.location.href.includes('?') ? '' : '';
+            // @ts-ignore
+            window.location.href = this.switchLocalePath(lang) + (lang === 'ua' ? '' : isSlash);
         },
     },
 });
@@ -95,6 +125,30 @@ export default defineComponent({
     background-color: $white;
     box-shadow: 3px 0px 40px 0px $product-serial-color;
     overflow-y: auto;
+    transition: 0.25s;
+
+    &__langs {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+
+        & i {
+            display: block;
+            font-size: 16px;
+            color: $dark;
+        }
+
+        &-select {
+            padding: 5px;
+            font-size: 16px;
+            border: none;
+            outline-color: $product-serial-color;
+            cursor: pointer;
+            color: $dark;
+        }
+    }
 
     &__overlay {
         position: fixed;
@@ -222,7 +276,6 @@ export default defineComponent({
     }
 
     @media screen and (max-width: 576px) {
-        transition: 0.25s;
         width: 0;
         padding: 150px 0 0;
         position: relative;

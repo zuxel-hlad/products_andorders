@@ -10,8 +10,8 @@
                 alt="закртити деталі"
                 title="закртити деталі"
             )
-        h4.details__title Дуже дуже придуже дліннюча назва дліннючого приходу
-        button.details__add-product(type="button") Додати продукт
+        h4.details__title {{$t('orderDetailListTitle')}}
+        button.details__add-product(type="button") {{$t('addProduct')}}
             i.fa-solid.fa-plus
     .details__list(v-if="products.length")
         transition-group(name="details-list")
@@ -23,7 +23,7 @@
                     :selected="false"
                     @delete-product="$emit('delete-product',product)"
                 )
-    h4.main-title.details__empty(v-else) Продуктів покищо немає.
+    h4.main-title.details__empty(v-else) {{ $t('productsEmpty') }}
 </template>
 
 <script lang="ts">

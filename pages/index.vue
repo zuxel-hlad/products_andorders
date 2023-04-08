@@ -28,7 +28,7 @@ section.orders
         )
     app-modal(
         modalType="order"
-        :titleType="orderDetails ? 'продукт' : 'прихід'"
+        :titleType="orderDetails ? $t('itemType.product') : $t('itemType.coming') "
         :visibility="modal"
         :deletedItem="deletedItem"
         @close-modal="closeModal"

@@ -1,6 +1,6 @@
 <template lang="pug">
 section
-    h1.main-title Скоро...
+    h1.main-title {{ $t('comingSoon') }}
 </template>
 
 <script lang="ts">

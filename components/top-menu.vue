@@ -6,8 +6,6 @@
             :placeholder="$t('header.search') " 
             name="search"
         )
-        button(@click.prevent="$i18n.setLocale('ua')" type="button") ua
-        button(@click.prevent="$i18n.setLocale('en')" type="button") en
     .top-menu__info
         .top-menu__info-date
             span.top-menu__info-text {{ today }}
@@ -73,7 +71,6 @@ export default defineComponent({
         },
     },
     created() {
-        console.log(this.$i18n.locale);
         this.updateTime();
         setInterval(this.updateTime, 1000);
     },

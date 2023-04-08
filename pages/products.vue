@@ -18,7 +18,7 @@ section.products
             )
     h4.main-title(v-else) Продуктів покищо немає.
     app-modal(
-        titleType="продукт"
+        :titleType="$t('itemType.product')"
         modalType="product"
         :visibility="modal"
         @close-modal="closeModal"

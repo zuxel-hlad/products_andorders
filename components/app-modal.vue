@@ -11,7 +11,7 @@
                 alt="close modal" 
                 title="close modal"
             )
-        h4.modal-content__title.wrap-text Ви впевнені що бажаєти видалити цей {{ titleType }} ?
+        h4.modal-content__title.wrap-text {{ $t('modal.title') }} {{ titleType }} ?
         .modal-content__product
             .modal-content__product-status 
             .modal-content__product-img.img-full
@@ -23,13 +23,13 @@
             button.modal-content__buttons-btn.wrap-text(
                 type="button"
                 @click="$emit('cancel')"
-                ) Скасувати
+                ) {{ $t('modal.cancel') }}
             button.modal-content__buttons-btn.wrap-text.modal-content__buttons-btn_delete(
                 type="button"
                 @click="$emit('delete')"
                 )
                 i.fa-regular.fa-trash-can &nbsp;
-                | Видалити
+                | {{ $t('modal.delete') }}
                 
 
 </template>

@@ -15,6 +15,7 @@
                     v-for="({type, label}, idx) in filterOptions"
                     :value="type"
                     :key="idx"
+                    :selected="$route.query.filter === type"
                 ) {{ label }}
             option.coming-bar__select-option(
                 v-else
@@ -48,7 +49,11 @@ export default defineComponent({
     },
     components: { pageTitle },
     created() {
-        this.$router.replace({ query: { filter: 'all' } });
+        if (this.$route.query.filter) {
+            return;
+        } else {
+            this.$router.replace({ query: { filter: 'all' } });
+        }
     },
     methods: {
         setFilter(event: Event): void {

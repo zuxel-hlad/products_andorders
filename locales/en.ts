@@ -25,7 +25,15 @@ export default {
         mouses: 'Mouses',
         videocards: 'Videocards',
         motherboards: 'Motherboards',
-        hardDisks: 'Hard disks'
-
+        hardDisks: 'Hard disks',
     },
+    comingSoon: 'Coming soon...',
+    modal: {
+        title: 'Are you sure you want to delete this',
+        cancel: 'Cancel',
+        delete: 'Delete',
+    },
+    addProduct: 'Add product',
+    productsEmpty: 'No products yet',
+    orderDetailListTitle: 'The long name of the long parish is very, very strong',
 };
