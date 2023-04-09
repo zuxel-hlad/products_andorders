@@ -1,4 +1,5 @@
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
+const port = 5000;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -26,3 +27,4 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+// "dev": "concurrently \"nuxt dev\" \"node server.js\"",
