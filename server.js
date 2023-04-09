@@ -4,15 +4,11 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: ['http://localhost:3000', 'https://orders-products.netlify.app', 'http://localhost:5000'],
+        origin: ['http://localhost:3000', 'https://orders-products.netlify.app'],
         methods: ['GET', 'POST'],
         allowedHeaders: ['my-custom-header'],
         credentials: true,
     },
-});
-
-app.get('/getPort', (req, res) => {
-    res.send({ port });
 });
 
 let sessions = 0;
@@ -30,5 +26,3 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
-
-// export const workport = port;
