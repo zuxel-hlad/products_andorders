@@ -1,4 +1,4 @@
-const port = process.env.PORT || 5000 || 80 || 443;
+const port = process.env.PORT || 443;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
