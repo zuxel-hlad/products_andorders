@@ -4,9 +4,7 @@ import { useStore } from '~/store';
 export default defineNuxtPlugin(({ $pinia }: any) => {
     const { setActiveSessions } = useStore($pinia);
     const url =
-        process.env.NODE_ENV === 'development'
-            ? 'http://localhost:5000'
-            : 'https://inspiring-quokka-db122c.netlify.app';
+        process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://orders-products.netlify.app/';
     const socket = io(`${url}`);
     socket.on('sessions', (sessions) => {
         setActiveSessions(sessions);
