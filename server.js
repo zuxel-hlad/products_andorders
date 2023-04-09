@@ -11,6 +11,10 @@ const io = require('socket.io')(server, {
     },
 });
 
+app.get('/getPort', (req, res) => {
+    res.send({ port });
+});
+
 let sessions = 0;
 
 io.on('connection', (socket) => {
