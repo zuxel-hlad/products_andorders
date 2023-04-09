@@ -2,7 +2,6 @@ import { Order, Product } from '../types/types';
 import generateMockPrice from '~/helpers/generate-mock-price';
 import generateRandomSerial from '~/helpers/generate-random-serial';
 
-
 generateRandomSerial(10);
 export const orders = [
     {

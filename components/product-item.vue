@@ -16,9 +16,9 @@
             :class="{'product-item__status-status_free': product.status === 'вільний'}"
         ) {{ product.status ? product.status : '-' }}
         .product-item__status-dates
-            span з&nbsp;
+            span {{$t('from')}}&nbsp;
                 span {{ product.guarantee.start ? product.guarantee.start : '-' }}
-            span по&nbsp;
+            span {{$t('to')}}&nbsp;
                 span {{ product.guarantee.end ? product.guarantee.end : '-' }}
     span.product-item__state {{ product.state ? product.state : '-' }}
     .product-item__prices
@@ -78,11 +78,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .product-item {
-    min-width: 2542px;
+    min-width: 2550px;
     display: grid;
     position: relative;
     grid-template-columns:
-        10px 42px 475px 255px 50px
+        10px 42px 475px 275px 60px
         123px 380px 263px 374px 115px 25px;
     grid-template-rows: 1fr;
     grid-auto-rows: 1fr;

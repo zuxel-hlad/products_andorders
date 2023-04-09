@@ -35,5 +35,7 @@ export default {
     },
     addProduct: 'Додати продукт',
     productsEmpty: 'Продуктів покищо немає.',
-    orderDetailListTitle: 'Дуже дуже придуже дліннюча назва дліннючого приходу'
+    orderDetailListTitle: 'Дуже дуже придуже дліннюча назва дліннючого приходу',
+    from: 'з',
+    to: 'по',
 };

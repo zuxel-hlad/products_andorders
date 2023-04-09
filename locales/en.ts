@@ -36,4 +36,6 @@ export default {
     addProduct: 'Add product',
     productsEmpty: 'No products yet',
     orderDetailListTitle: 'The long name of the long parish is very, very strong',
+    from: 'from',
+    to: 'to',
 };

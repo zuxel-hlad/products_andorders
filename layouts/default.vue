@@ -15,6 +15,11 @@ export default defineComponent({
         appHeader,
         navigationMenu,
     },
+    mounted() {
+        // this.$nuxt.context.app.provide('myGlobalThis', this)
+        // @ts-ignore
+        this.$nuxt.vueApp.provide('myGlobalThis', this);
+    },
 });
 </script>
 

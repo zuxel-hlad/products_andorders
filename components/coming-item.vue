@@ -13,7 +13,7 @@
             i.fa-solid.fa-list-ul
         .coming-item__products-text
             span.coming-item__products-count {{ order.products.length ? order.products.length : '-' }}
-            span.coming-item__products-text Продукти
+            span.coming-item__products-text {{ $t('aside.products') }}
     .coming-item__coming-date 
         span.date-short {{ order.shortDate ? order.shortDate : '-' }}
         span.date-full {{ order.date ? order.date : '-' }}
