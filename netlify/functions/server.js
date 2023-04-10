@@ -1,10 +1,10 @@
-const port = process.env.PORT || 5000;
+const port = 4000;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: ['http://localhost:3000', 'https://orders-products.netlify.app/'],
+        origin: ['http://localhost:3000', 'https://orders-products.netlify.app', 'http://localhost:8888'],
         methods: ['GET', 'POST'],
         allowedHeaders: ['my-custom-header'],
         credentials: true,
@@ -26,3 +26,12 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
+export const handler = async () => {
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+            data: sessions,
+        }),
+    };
+};
