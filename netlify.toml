@@ -1,0 +1,3 @@
+[[functions]]
+  name = "server" # Имя вашей функции
+  path = "/netlify/functions/server.js"
