@@ -9,7 +9,7 @@ export default {
         groups: 'Групи',
         products: 'Продукти',
         users: 'Користувачі',
-        settings: 'Налаштуванн',
+        settings: 'Налаштування',
     },
     filter: {
         label: 'Тип:',
