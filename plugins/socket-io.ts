@@ -3,7 +3,7 @@ import { useStore } from '~/store';
 
 export default defineNuxtPlugin(({ $pinia }: any) => {
     const { setActiveSessions } = useStore($pinia);
-    const url = 'https://sessions-count.netlify.app';
+    const url = 'http://localhost:5000';
     const socket = io(`${url}`);
     socket.on('sessions', (sessions) => {
         setActiveSessions(sessions);
