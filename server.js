@@ -1,10 +1,10 @@
-const port = 4000;
+const port = process.env.PORT || 4000;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: ['http://localhost:3000', 'https://orders-products.netlify.app', 'http://localhost:8888'],
+        origin: ['http://localhost:3000', 'https://products-manager.netlify.app', 'http://localhost:8888'],
         methods: ['GET', 'POST'],
         allowedHeaders: ['my-custom-header'],
         credentials: true,
