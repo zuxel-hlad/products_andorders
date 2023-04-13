@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product } from '~/types/types';
+import { Product } from '~/types';
 
 export default defineComponent({
     name: 'product-item',

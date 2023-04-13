@@ -1,7 +1,7 @@
 import { orders, products } from './mock-data';
 import { defineStore } from 'pinia';
-import { Order, Product } from '~/types/types';
-import { DeletedItem } from '../types/types';
+import { Order, Product } from '~/types';
+import { DeletedItem } from '../types';
 import { useStore } from './index';
 import transformDate from '~/helpers/transform-date';
 import calcTotalProductsPrice from '~/helpers/calc-total-products-price';

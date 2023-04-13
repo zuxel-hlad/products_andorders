@@ -6,6 +6,7 @@ const io = require('socket.io')(server, {
     cors: {
         origin: [
             'http://localhost:3000',
+            'http://localhost:5000',
             'https://orders-products.netlify.app',
         ],
         methods: ['GET', 'POST'],
@@ -13,8 +14,11 @@ const io = require('socket.io')(server, {
         credentials: true,
     },
 });
+const cors = require('cors');
 
 let sessions = 0;
+
+app.use(cors());
 
 io.on('connection', socket => {
     sessions++;

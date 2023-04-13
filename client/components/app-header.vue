@@ -11,21 +11,11 @@ header.header
         top-menu
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import topMenu from '~/components/top-menu.vue';
 import { useStore } from '~/store';
-import { mapActions } from 'pinia';
 
-export default defineComponent({
-    name: 'app-header',
-    components: {
-        topMenu,
-    },
-    methods: {
-        ...mapActions(useStore, ['openMobileMenu']),
-    },
-});
+const { openMobileMenu } = useStore();
 </script>
 
 <style scoped lang="scss">

@@ -3,7 +3,7 @@ section.products
     comingBar(
         :title-text="$t('aside.products')"
         :count="filteredProducts.length"
-        :filter-options="filterOptions"
+        :filterOptions="filterOptions"
     )
     app-list(
         v-if="filteredProducts.length"
@@ -27,68 +27,55 @@ section.products
     )
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { mapState, mapActions } from 'pinia';
-import { useProductsStore } from '~/store/products';
-import { useStore } from '~/store';
-import { Filters, Product } from '~/types/types';
-import { addDeltaXScroll, removeDeltaXScroll } from '~/helpers/handle-deltaX-scroll';
+<script setup lang="ts">
 import appList from '~/components/app-list.vue';
 import comingBar from '~/components/coming-bar.vue';
 import appModal from '~/components/app-modal.vue';
 import productItem from '~/components/product-item.vue';
+import type { Filters, Product } from '~/types';
+import { useProductsStore } from '~/store/products';
+import { useStore } from '~/store/index';
+import { addDeltaXScroll, removeDeltaXScroll } from '~/helpers/handle-deltaX-scroll';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
-export default defineComponent({
-    name: 'products-list',
-    components: {
-        comingBar,
-        appList,
-        appModal,
-        productItem,
-    },
-    computed: {
-        ...mapState(useStore, {
-            modal: ({ modal }) => modal,
-        }),
-        ...mapState(useProductsStore, {
-            products: ({ transformedProducts }) => transformedProducts,
-        }),
-        filteredProducts(): Product[] | [] {
-            const filter = this.$route.query.filter ? this.$route.query.filter : 'all';
-            if (filter === 'all') {
-                return this.products;
-            }
-            return this.products.filter((product) => product.type.type === filter);
-        },
-        filterOptions(): Filters[] | [] {
-            if (this.products.length) {
-                const types = this.products.map((item) => item.type);
-                return types.filter((item, index) => {
-                    const firstIndex = types.findIndex((obj) => {
-                        return JSON.stringify(obj) === JSON.stringify(item);
-                    });
-                    return index === firstIndex;
-                });
-            } else {
-                return [];
-            }
-        },
-    },
-    methods: {
-        ...mapActions(useProductsStore, ['deleteProduct']),
-        ...mapActions(useStore, ['openModal', 'closeModal']),
-        deletedProductItem({ id, serialNumber, title }: Product): void {
-            this.openModal({ id, serialNumber, title });
-        },
-    },
-    mounted() {
-        addDeltaXScroll('.app-list');
-    },
-    beforeUnmount() {
-        removeDeltaXScroll('.app-list');
-    },
+const route = useRoute();
+
+const store = useStore();
+const { modal } = storeToRefs(store);
+const { closeModal, openModal } = store;
+
+const productsStore = useProductsStore();
+const { transformedProducts: products } = storeToRefs(productsStore);
+const { deleteProduct } = productsStore;
+
+const filteredProducts = computed((): Product[] | [] => {
+    const filter = route.query.filter ? route.query.filter : 'all';
+    if (filter === 'all') {
+        return products.value;
+    }
+    return products.value.filter((product) => product.type.type === filter);
 });
+
+const filterOptions = computed((): Filters[] | [] => {
+    if (products.value.length) {
+        const types = products.value.map((item) => item.type);
+        return types.filter((item, index) => {
+            const firstIndex = types.findIndex((obj) => {
+                return JSON.stringify(obj) === JSON.stringify(item);
+            });
+            return index === firstIndex;
+        });
+    } else {
+        return [];
+    }
+});
+const deletedProductItem = ({ id, serialNumber, title }: Product): void => {
+    openModal({ id, serialNumber, title });
+};
+
+onMounted(() => addDeltaXScroll('.app-list'));
+onBeforeUnmount(() => removeDeltaXScroll('.app-list'));
 </script>
 <style lang="scss" scoped>
 .products-list-move,

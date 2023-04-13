@@ -1,4 +1,4 @@
-import { Order, Product } from '../types/types';
+import { Order, Product } from '../types';
 import generateMockPrice from '~/helpers/generate-mock-price';
 import generateRandomSerial from '~/helpers/generate-random-serial';
 

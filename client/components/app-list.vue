@@ -3,17 +3,13 @@
     slot
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-    name: 'app-list',
-    props: {
-        withOverflow: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
-    },
+<script setup lang="ts">
+interface Props {
+    withOverflow?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+    withOverflow: false,
 });
 </script>
 

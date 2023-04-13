@@ -43,7 +43,7 @@ import { useOrdersStore } from '~/store/orders';
 import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
 import { mapState, mapActions } from 'pinia';
-import { DeletedItem } from '~/types/types';
+import { DeletedItem } from '~/types';
 import pageTitle from '~/components/page-title.vue';
 import appList from '~/components/app-list.vue';
 import comingItem from '~/components/coming-item.vue';

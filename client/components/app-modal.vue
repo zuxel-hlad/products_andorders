@@ -4,7 +4,7 @@
     .modal-content(@click.stop)
         button.modal-content__close.img-full(
             type="button" 
-            @click="$emit('close-modal')"
+            @click="emit('close-modal')"
             )
             img(
                 src="../assets/svg/close.svg" 
@@ -22,11 +22,11 @@
         .modal-content__buttons
             button.modal-content__buttons-btn.wrap-text(
                 type="button"
-                @click="$emit('cancel')"
+                @click="emit('cancel')"
                 ) {{ $t('modal.cancel') }}
             button.modal-content__buttons-btn.wrap-text.modal-content__buttons-btn_delete(
                 type="button"
-                @click="$emit('delete')"
+                @click="emit('delete')"
                 )
                 i.fa-regular.fa-trash-can &nbsp;
                 | {{ $t('modal.delete') }}
@@ -34,34 +34,31 @@
 
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useStore } from '~/store';
-import { mapState } from 'pinia';
+import { storeToRefs } from 'pinia';
 
-export default defineComponent({
-    name: 'app-modal',
-    props: {
-        visibility: {
-            type: Boolean,
-            default: false,
-            required: true,
-        },
-        titleType: {
-            type: String,
-            required: true,
-            default: '',
-        },
-        modalType: {
-            type: String as () => 'order' | 'product',
-            required: true,
-            default: '',
-        },
-    },
-    computed: {
-        ...mapState(useStore, ['deletedItem']),
-    },
+interface Props {
+    visibility: boolean;
+    titleType: string;
+    modalType: 'order' | 'product';
+}
+
+withDefaults(defineProps<Props>(), {
+    visibility: false,
+    titleType: '',
+    modalType: 'product',
 });
+
+const emit = defineEmits<{
+    (e: 'close-modal'): void;
+    (e: 'cancel'): void;
+    (e: 'delete'): void;
+}>();
+
+const store = useStore();
+
+const { deletedItem } = storeToRefs(store);
 </script>
 
 <style scoped lang="scss">

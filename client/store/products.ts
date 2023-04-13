@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useStore } from './index';
-import { Product } from '../types/types';
+import { Product } from '../types';
 import { products } from './mock-data';
 import transformDate from '~/helpers/transform-date';
 
@@ -18,7 +18,7 @@ export const useProductsStore = defineStore('products', {
     },
 
     getters: {
-        transformedProducts(state) {
+        transformedProducts(state): Product[] {
             if (state.products.length) {
                 return state.products.map((product) => ({
                     ...product,

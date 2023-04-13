@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ComingOrder } from '~/types/types';
+import { ComingOrder } from '~/types';
 
 export default defineComponent({
     name: 'coming-item',

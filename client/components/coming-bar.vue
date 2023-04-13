@@ -15,7 +15,7 @@
                     v-for="({type, label}, idx) in filterOptions"
                     :value="type"
                     :key="idx"
-                    :selected="$route.query.filter === type"
+                    :selected="route.query.filter === type"
                 ) {{ label }}
             option.coming-bar__select-option(
                 v-else
@@ -23,45 +23,34 @@
             ) {{ $t('filter.empty') }}
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import type { Filters } from '~/types';
 import pageTitle from '~/components/page-title.vue';
-import { Filters } from '~/types/types';
 
-export default defineComponent({
-    name: 'coming-bar',
-    props: {
-        titleText: {
-            type: String,
-            default: '',
-            required: true,
-        },
-        count: {
-            type: Number,
-            default: 0,
-            required: true,
-        },
-        filterOptions: {
-            type: Array as () => Filters[],
-            default: () => [],
-            requiered: true,
-        },
-    },
-    components: { pageTitle },
-    created() {
-        if (this.$route.query.filter) {
-            return;
-        } else {
-            this.$router.replace({ query: { filter: 'all' } });
-        }
-    },
-    methods: {
-        setFilter(event: Event): void {
-            const value = (event.target as HTMLInputElement).value;
-            this.$router.replace({ query: { filter: value } });
-        },
-    },
+interface Props {
+    titleText: string;
+    count: number;
+    filterOptions: Filters[];
+}
+
+const route = useRoute();
+const router = useRouter();
+
+withDefaults(defineProps<Props>(), {
+    titleText: '',
+    count: 0,
+    filterOptions: () => [],
 });
+
+if (!route.query.filter) {
+    router.replace({ query: { filter: 'all' } });
+}
+
+const setFilter = (event: Event): void => {
+    const value = (event.target as HTMLInputElement).value;
+    router.replace({ query: { filter: value } });
+};
+
 </script>
 
 <style scoped lang="scss">

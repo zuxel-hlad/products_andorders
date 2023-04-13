@@ -1,4 +1,4 @@
-import { Product } from '~/types/types';
+import { Product } from '~/types';
 
 export default (array: Product[], currency: string): number => {
     return array

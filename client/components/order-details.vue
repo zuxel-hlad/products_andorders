@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Product } from '~/types/types';
+import { Product } from '~/types';
 import productItem from '~/components/product-item.vue';
 export default defineComponent({
     name: 'order-details',

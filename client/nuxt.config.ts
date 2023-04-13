@@ -45,5 +45,4 @@ export default defineNuxtConfig({
         defaultLocale: 'ua',
         detectBrowserLanguage: false,
     },
-    components: false,
 });

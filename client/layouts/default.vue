@@ -5,17 +5,10 @@ main.main
     slot
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import appHeader from '~/components/app-header.vue';
 import navigationMenu from '~/components/navigation-menu.vue';
 
-export default defineComponent({
-    components: {
-        appHeader,
-        navigationMenu,
-    },
-});
 </script>
 
 <style lang="scss" scoped>
