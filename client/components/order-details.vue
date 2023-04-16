@@ -3,7 +3,7 @@
     .details__header
         button.details__close.img-full(
             type="button"
-            @click="$emit('close-details')"
+            @click="emit('close-details')"
             )
             img(
                 src="~/assets/svg/close.svg" 
@@ -21,37 +21,29 @@
                     :key="product.id" 
                     :product="product"
                     :selected="false"
-                    @delete-product="$emit('delete-product',product)"
+                    @delete-product="emit('delete-product', product)"
                 )
     h4.main-title.details__empty(v-else) {{ $t('productsEmpty') }}
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { Product } from '~/types';
+<script setup lang="ts">
+import type { Product } from '~/types';
 import productItem from '~/components/product-item.vue';
-export default defineComponent({
-    name: 'order-details',
-    props: {
-        products: {
-            type: Array as () => Product[],
-            required: true,
-            default: () => [],
-        },
-        selectedOrderId: {
-            type: Number as () => number | null,
-            required: true,
-            default: null,
-        },
-    },
-    components: { productItem },
-    computed: {},
-    data() {
-        return {
-            seletedIdx: 1,
-        };
-    },
+
+interface Props {
+    products: Product[];
+    selectedOrderId: number;
+}
+
+withDefaults(defineProps<Props>(), {
+    products: () => [],
+    selectedOrderId: 0,
 });
+
+const emit = defineEmits<{
+    (e: 'delete-product', product: Product): void;
+    (e: 'close-details'): void;
+}>();
 </script>
 
 <style scoped lang="scss">

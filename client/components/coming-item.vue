@@ -1,58 +1,64 @@
 <template lang="pug">
 .coming-item(
-    @click="$emit('view-details')"
+    @click="emit('view-details')"
     :class="{'coming-item_short': isShort, 'coming-item_selected': isShort && selected}"
 )
-    span.coming-item__coming-name {{ order.title ? order.title : '-' }}
+    span.coming-item__coming-name {{ order.title }}
     .coming-item__products
         button.coming-item__products-btn(
             type="button"
             :title="isShort ? 'Закрити деталі приходу' : 'Відкрити деталі приходу'"
-            @click="$emit('open-details')"
+            @click="emit('open-details')"
             )
             i.fa-solid.fa-list-ul
         .coming-item__products-text
-            span.coming-item__products-count {{ order.products.length ? order.products.length : '-' }}
+            span.coming-item__products-count {{ order.products?.length }}
             span.coming-item__products-text {{ $t('aside.products') }}
     .coming-item__coming-date 
-        span.date-short {{ order.shortDate ? order.shortDate : '-' }}
-        span.date-full {{ order.date ? order.date : '-' }}
+        span.date-short {{ order.shortDate }}
+        span.date-full {{ order.date }}
     .coming-item__prices
-        span.coming-item__prices-usd {{ order.totalSumUSD ? order.totalSumUSD : '-' }}
-        span.coming-item__prices-uah {{ order.totalSumUAH ? order.totalSumUAH : '-' }}
+        span.coming-item__prices-usd {{ order.totalSumUSD }}
+        span.coming-item__prices-uah {{ order.totalSumUAH }}
     button.coming-item__delete(
         type="button"
-        @click="$emit('delete-coming')"
+        @click="emit('delete-coming')"
         )
         i.fa-regular.fa-trash-can
     button.coming-item__details
         i.fa-solid.fa-chevron-right
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { ComingOrder } from '~/types';
+<script setup lang="ts">
+import type { ComingOrder } from '~/types';
 
-export default defineComponent({
-    name: 'coming-item',
-    props: {
-        isShort: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
-        order: {
-            type: Object as () => ComingOrder,
-            required: true,
-            default: () => {},
-        },
-        selected: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
-    },
+interface Props {
+    isShort?: boolean;
+    order?: ComingOrder;
+    selected?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+    isShort: false,
+    order: () => ({
+        date: '-',
+        description: '-',
+        id: 0,
+        products: [],
+        shortDate: '-',
+        title: '-',
+        totalSumUAH: '-',
+        totalSumUSD: '-',
+    }),
+    selected: false,
 });
+
+const emit = defineEmits<{
+    (e: 'view-details'): void;
+    (e: 'open-details'): void;
+    (e: 'delete-coming'): void;
+}>();
+
 </script>
 <style scoped lang="scss">
 .coming-item {

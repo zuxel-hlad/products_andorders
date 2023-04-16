@@ -6,28 +6,17 @@ h1.main-title.page-title(
         i.fa-solid.fa-plus
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+interface Props {
+    titleText: string;
+    withButton?: boolean;
+    counter: number;
+}
 
-export default defineComponent({
-    name: 'page-title',
-    props: {
-        titleText: {
-            type: String,
-            requierd: true,
-            default: '',
-        },
-        withButton: {
-            type: Boolean,
-            requierd: false,
-            default: false,
-        },
-        counter: {
-            type: Number,
-            requierd: true,
-            default: 0,
-        },
-    },
+withDefaults(defineProps<Props>(), {
+    titleText: '',
+    withButton: false,
+    counter: 0,
 });
 </script>
 

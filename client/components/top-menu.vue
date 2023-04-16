@@ -25,64 +25,59 @@
                 |&nbsp;&nbsp; {{ activeSessions }}
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { mapState } from 'pinia';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { useStore } from '~/store';
 
-export default defineComponent({
-    name: 'top-menu',
-    data() {
-        return {
-            time: '00:00:00',
-        };
-    },
-    computed: {
-        ...mapState(useStore, ['activeSessions']),
-        today() {
-            const daysOfWeekUA = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'];
-            const daysOfWeekEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const daysOfWeek = this.$i18n.locale === 'ua' ? daysOfWeekUA : daysOfWeekEN;
-            const date = new Date();
-            const dayOfWeek = daysOfWeek[date.getDay()];
-            return dayOfWeek;
-        },
-        todayDate() {
-            const monthsOfWeekEN = ['Jan', 'Feb', 'Ma', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-            const monthsOfWeekUA = [
-                'Січ',
-                'Лют',
-                'Берез',
-                'Квіт',
-                'Трав',
-                'Черв',
-                'Лип',
-                'Серп',
-                'Верес',
-                'Жовт',
-                'Лист',
-                'Груд',
-            ];
-            const monthsOfWeek = this.$i18n.locale === 'ua' ? monthsOfWeekUA : monthsOfWeekEN;
-            const date = new Date();
-            const todayDate = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-            const dateString = `${todayDate} ${monthsOfWeek[date.getMonth()]}, ${date.getFullYear()}`;
-            return dateString;
-        },
-    },
-    created() {
-        this.updateTime();
-        setInterval(this.updateTime, 1000);
-    },
-    methods: {
-        updateTime() {
-            const date = new Date();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            this.time = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-        },
-    },
+let time = ref('00:00:00');
+updateTime();
+const clockTimer = setInterval(updateTime, 1000);
+
+const { activeSessions } = useStore();
+const { $i18n } = useNuxtApp();
+
+const today = computed((): string => {
+    const daysOfWeekUA = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'];
+    const daysOfWeekEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const daysOfWeek = $i18n.locale.value === 'ua' ? daysOfWeekUA : daysOfWeekEN;
+    const date = new Date();
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    return dayOfWeek;
 });
+
+const todayDate = computed((): string => {
+    const monthsOfWeekEN = ['Jan', 'Feb', 'Ma', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    const monthsOfWeekUA = [
+        'Січ',
+        'Лют',
+        'Берез',
+        'Квіт',
+        'Трав',
+        'Черв',
+        'Лип',
+        'Серп',
+        'Верес',
+        'Жовт',
+        'Лист',
+        'Груд',
+    ];
+    const monthsOfWeek = $i18n.locale === 'ua' ? monthsOfWeekUA : monthsOfWeekEN;
+    const date = new Date();
+    const todayDate = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    const dateString = `${todayDate} ${monthsOfWeek[date.getMonth()]}, ${date.getFullYear()}`;
+    return dateString;
+});
+
+onBeforeUnmount(() => {
+    clearInterval(clockTimer);
+});
+
+function updateTime(): void {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    time.value = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+}
 </script>
 
 <style scoped lang="scss">

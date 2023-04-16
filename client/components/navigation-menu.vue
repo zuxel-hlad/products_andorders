@@ -8,7 +8,7 @@ aside.navigation-menu(:class="{'navigation-menu_active': mobileMenu}")
         )
         button.navigation-menu__user-profile(
             type="button"
-            @click="$router.push('/profile')"
+            @click="router.push('/profile')"
         )
             i.fa-sharp.fa-solid.fa-gear
     label.navigation-menu__langs
@@ -22,94 +22,84 @@ aside.navigation-menu(:class="{'navigation-menu_active': mobileMenu}")
             ) {{ label }}
     nuxt-link.navigation-menu__link(
         v-for='{ to, name, id, iconClassname } in links',
-        :class="{'router-link-exact-active': $route.path.includes('order') && to === '/'}"
-        :key='id',
-        :to='customLocalePath(to)'
+        :class="{'router-link-exact-active': route.path.includes('order') && to === '/'}"
+        :key="id",
+        :to="$localePath(to)"
         )
         span.navigation-menu__link-text.wrap-text {{ name }}
             i(:class="iconClassname")
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useStore } from '~/store';
-import { mapState, mapActions } from 'pinia';
-import { defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-export default defineComponent({
-    name: 'navigation-menu',
-    data() {
-        return {
-            links: [
-                {
-                    name: this.$t('aside.coming'),
-                    to: '/',
-                    id: 1,
-                    iconClassname: 'fa-solid fa-right-to-bracket',
-                },
-                {
-                    name: this.$t('aside.groups'),
-                    to: '/groups',
-                    id: 2,
-                    iconClassname: 'fa-sharp fa-solid fa-layer-group',
-                },
-                {
-                    name: this.$t('aside.products'),
-                    to: '/products',
-                    id: 3,
-                    iconClassname: 'fa-sharp fa-solid fa-boxes-stacked',
-                },
-                {
-                    name: this.$t('aside.users'),
-                    to: '/users',
-                    id: 4,
-                    iconClassname: 'fa-solid fa-users',
-                },
-                {
-                    name: this.$t('aside.settings'),
-                    to: '/settings',
-                    id: 5,
-                    iconClassname: 'fa-sharp fa-solid fa-wrench',
-                },
-            ],
-            langs: [
-                {
-                    label: 'ua',
-                    name: 'ua',
-                    id: 4,
-                },
-                {
-                    label: 'en',
-                    name: 'en',
-                    id: 5,
-                },
-            ],
-        };
+const { $i18n, $switchLocalePath, $localePath } = useNuxtApp();
+const route = useRoute();
+const router = useRouter();
+const store = useStore();
+const { mobileMenu } = storeToRefs(store);
+const { openMobileMenu } = store;
+
+const links = ref([
+    {
+        name: $i18n.t('aside.coming'),
+        to: '/',
+        id: 1,
+        iconClassname: 'fa-solid fa-right-to-bracket',
     },
-    computed: {
-        ...mapState(useStore, ['mobileMenu']),
-        currentLang(): string {
-            return this.$i18n.locale;
-        },
+    {
+        name: $i18n.t('aside.groups'),
+        to: '/groups',
+        id: 2,
+        iconClassname: 'fa-sharp fa-solid fa-layer-group',
     },
-    watch: {
-        $route() {
-            if (!this.mobileMenu) return;
-            this.openMobileMenu();
-        },
+    {
+        name: $i18n.t('aside.products'),
+        to: '/products',
+        id: 3,
+        iconClassname: 'fa-sharp fa-solid fa-boxes-stacked',
     },
-    methods: {
-        ...mapActions(useStore, ['openMobileMenu']),
-        customLocalePath(path: string): string {
-            //@ts-ignore
-            return this.localePath(path);
-        },
-        setLang(event: Event): void {
-            const { value: lang } = event.target as HTMLInputElement;
-            const isSlash = window.location.href.includes('?') ? '' : '';
-            // @ts-ignore
-            window.location.href = this.switchLocalePath(lang) + (lang === 'ua' ? '' : isSlash);
-        },
+    {
+        name: $i18n.t('aside.users'),
+        to: '/users',
+        id: 4,
+        iconClassname: 'fa-solid fa-users',
     },
+    {
+        name: $i18n.t('aside.settings'),
+        to: '/settings',
+        id: 5,
+        iconClassname: 'fa-sharp fa-solid fa-wrench',
+    },
+]);
+
+const langs = ref([
+    {
+        label: 'ua',
+        name: 'ua',
+        id: 4,
+    },
+    {
+        label: 'en',
+        name: 'en',
+        id: 5,
+    },
+]);
+
+const currentLang = computed((): string => $i18n.locale.value);
+const setLang = (event: Event): void => {
+    const { value: lang } = event.target as HTMLInputElement;
+    const isSlash = window.location.href.includes('?') ? '' : '';
+    window.location.href = $switchLocalePath(lang) + (lang === 'ua' ? '' : isSlash);
+};
+
+watch(route, () => {
+    if (mobileMenu.value) {
+        openMobileMenu();
+    }
 });
 </script>
 

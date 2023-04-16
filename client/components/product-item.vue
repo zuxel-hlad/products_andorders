@@ -1,5 +1,5 @@
 <template lang="pug">
-.product-item(:class="itemStyleClass")
+.product-item(:class="styles.isItemShort")
     .product-item__available(
         :class="{'product-item__available_available': product.available}"
     )
@@ -9,71 +9,94 @@
             alt="product name"
             )
     .product-item__descr
-        span.product-item__descr-text.wrap-text {{ product.title ? product.title : '-' }}
-        span.product-item__descr-text.product-item__descr-text_serial.wrap-text {{ product.serialNumber ? product.serialNumber : '-' }}
+        span.product-item__descr-text.wrap-text {{ product.title }}
+        span.product-item__descr-text.product-item__descr-text_serial.wrap-text {{ product.serialNumber }}
     .product-item__status
         span.product-item__status-status(
-            :class="{'product-item__status-status_free': product.status === 'вільний'}"
-        ) {{ product.status ? product.status : '-' }}
+            :class="styles.status"
+        ) {{ product.status }}
         .product-item__status-dates
             span {{$t('from')}}&nbsp;
-                span {{ product.guarantee.start ? product.guarantee.start : '-' }}
+                span {{ product?.guarantee?.start }}
             span {{$t('to')}}&nbsp;
-                span {{ product.guarantee.end ? product.guarantee.end : '-' }}
-    span.product-item__state {{ product.state ? product.state : '-' }}
+                span {{ product?.guarantee?.end }}
+    span.product-item__state {{ product.state }}
     .product-item__prices
-        template(v-if="product.price.length")
+        template(v-if="product?.price?.length")
             span(
                 v-for="(price, idx) in product.price"
                 :class="`product-item__prices-${price?.symbol?.toLocaleLowerCase()}`"
                 :key="idx"
                 ) {{ price.label}}
         span.product-item__prices-uah(v-else) -
-    span.product-item__group-name.wrap-text {{ product.group ? product.group : '-' }}
-    span.product-item__text.wrap-text.executor {{ product.executor ? product.executor : '-' }}
-    span.product-item__text.coming-name.wrap-text {{ product.comingName ? product.comingName : '-' }}
+    span.product-item__group-name.wrap-text {{ product.group }}
+    span.product-item__text.wrap-text.executor {{ product.executor }}
+    span.product-item__text.coming-name.wrap-text {{ product.comingName }}
     .product-item__coming-date 
-        span.date-short {{ product.shortDate ? product.shortDate : '-' }}
-        span.date-full {{ product.date ? product.date : '-' }}
+        span.date-short {{ product.shortDate }}
+        span.date-full {{ product.date }}
     button.product-item__delete(
         type="button"
-        @click="$emit('delete-product')"
+        @click="emit('delete-product')"
         )
         i.fa-regular.fa-trash-can
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { Product } from '~/types';
+<script setup lang="ts">
+import type { Product } from '~/types';
 
-export default defineComponent({
-    name: 'product-item',
-    emits: ['delete-product'],
-    props: {
-        product: {
-            type: Object as () => Product,
-            required: true,
-            default: () => {},
+interface Props {
+    product: Product;
+    isShort?: boolean;
+    selected?: boolean;
+}
+
+interface Styles<T> {
+    [key: string]: T;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    isShort: false,
+    selected: false,
+    product: () => ({
+        id: 0,
+        serialNumber: 0 || '-',
+        isNew: 0,
+        photo: '-',
+        title: '-',
+        type: {
+            type: '-',
+            label: '-',
         },
-        isShort: {
-            type: Boolean,
-            required: false,
-            default: false,
+        specification: '-',
+        guarantee: {
+            start: '-',
+            end: '-',
         },
-        selected: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
-    },
-    computed: {
-        itemStyleClass() {
-            return {
-                'product-item_short': this.isShort,
-            };
-        },
-    },
+        price: [],
+        order: 0,
+        date: '-',
+        shortDate: '-',
+        available: false,
+        executor: '-',
+        status: '-',
+        state: '-',
+        group: '-',
+        comingName: '-',
+    }),
 });
+
+const emit = defineEmits<{ (e: 'delete-product'): void }>();
+
+const styles = computed(
+    (): Styles<string> => ({
+        isItemShort: props.isShort ? 'product-item_short' : '',
+        status:
+            props.product.status === 'вільний' || props.product.status === 'free'
+                ? 'product-item__status-status_free'
+                : '',
+    })
+);
 </script>
 
 <style scoped lang="scss">
