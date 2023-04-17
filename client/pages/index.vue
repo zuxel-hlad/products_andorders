@@ -5,7 +5,7 @@ section.orders
         :titleText="$t('aside.coming')"
         :counter="orders.length"
     )
-    .orders-wrapper(:class="{'orders-wrapper_with-list': orderDetails}")
+    .orders-wrapper(:class="{'orders-wrapper_with-list': orderDetailsVisibility}")
         app-list(v-if="orders.length")
             transition-group(name="orders-list")
                 coming-item(
@@ -13,22 +13,22 @@ section.orders
                         :key="order.id"
                         :tabindex="idx"
                         :order="order"
-                        :isShort="orderDetails"
+                        :isShort="orderDetailsVisibility"
                         :selected="orderId === order.id"
                         @delete-coming="deleteOrderItem(order)"
                         @open-details="openOrderDetails(order.id)"
                         @view-details="orderId = order.id"
                     )
         h4.main-title(v-else) Приходів покищо немає.
-        order-details(v-if="orderDetails"
+        order-details(v-if="orderDetailsVisibility"
             :products="selectedOrderProducts"
-            @close-details="orderDetails = false"
+            @close-details="orderDetailsVisibility = false"
             @delete-product="deletedProductItem"
             :selectedOrderId="orderId"
         )
     app-modal(
-        modalType="order"
-        :titleType="orderDetails ? $t('itemType.product') : $t('itemType.coming') "
+        :modalType="orderDetailsVisibility ? 'product' : 'order'"
+        :titleType="orderDetailsVisibility ? $t('itemType.product') : $t('itemType.coming') "
         :visibility="modal"
         :deletedItem="deletedItem"
         @close-modal="closeModal"
@@ -37,73 +37,52 @@ section.orders
     )
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { useOrdersStore } from '~/store/orders';
-import { useProductsStore } from '~/store/products';
 import { useStore } from '~/store';
-import { mapState, mapActions } from 'pinia';
-import { DeletedItem } from '~/types';
+import { storeToRefs } from 'pinia';
+import type { DeletedItem } from '~/types';
 import pageTitle from '~/components/page-title.vue';
 import appList from '~/components/app-list.vue';
 import comingItem from '~/components/coming-item.vue';
 import appModal from '~/components/app-modal.vue';
 import orderDetails from '~/components/order-details.vue';
 
-export default defineComponent({
-    name: 'home',
-    components: {
-        pageTitle,
-        appList,
-        comingItem,
-        appModal,
-        orderDetails,
-    },
-    data() {
-        return {
-            orderDetails: false,
-            orderId: null as null | number,
-        };
-    },
-    computed: {
-        ...mapState(useStore, ['modal', 'deletedItem']),
-        ...mapState(useProductsStore, {
-            products: ({ transformedProducts }) => transformedProducts,
-        }),
-        ...mapState(useOrdersStore, {
-            orders: (store) => store.formattedProducts,
-        }),
-        selectedOrderProducts() {
-            if (!this.orderId) {
-                return [];
-            } else {
-                return this.orders?.find((order) => order?.id === this.orderId)?.products;
-            }
-        },
-    },
-    methods: {
-        ...mapActions(useStore, ['openModal', 'closeModal']),
-        ...mapActions(useOrdersStore, ['deleteOrder', 'deleteOrderProduct']),
-        ...mapActions(useProductsStore, ['deleteProduct']),
-        deleteOrderItem(deletedObj: DeletedItem): void {
-            this.openModal(deletedObj);
-        },
-        deletedProductItem({ id, serialNumber, title }: DeletedItem): void {
-            this.openModal({ id, serialNumber, title, parentId: this.orderId! });
-        },
-        checkDeleteItemFunctionType() {
-            if (this.orderDetails) {
-                this.deleteOrderProduct();
-            } else {
-                this.deleteOrder();
-            }
-        },
-        openOrderDetails(id: number): void {
-            this.orderDetails = !this.orderDetails;
-            this.orderId = id ? id : null;
-        },
-    },
+const orderDetailsVisibility = ref(false);
+const orderId = ref(0);
+const rootStore = useStore();
+const { deletedItem, modal } = storeToRefs(rootStore);
+const { openModal, closeModal } = rootStore;
+const ordersStore = useOrdersStore();
+const { formattedProducts: orders } = storeToRefs(ordersStore);
+const { deleteOrder, deleteOrderProduct } = ordersStore;
+
+const selectedOrderProducts = computed(() => {
+    if (!orderId.value) {
+        return [];
+    } else {
+        return orders.value?.find((order) => order?.id === orderId.value)?.products;
+    }
 });
+
+const deleteOrderItem = (deletedObj: DeletedItem): void => {
+    openModal(deletedObj);
+};
+const deletedProductItem = ({ id, serialNumber, title }: DeletedItem): void => {
+    openModal({ id, serialNumber, title, parentId: orderId });
+};
+const checkDeleteItemFunctionType = () => {
+    if (orderDetailsVisibility.value) {
+        deleteOrderProduct();
+    } else {
+        deleteOrder();
+    }
+};
+const openOrderDetails = (id: number): void => {
+    orderDetailsVisibility.value = !orderDetailsVisibility.value;
+    orderId.value = id ? id : 0;
+};
 </script>
 <style scoped lang="scss">
 @keyframes open-details {

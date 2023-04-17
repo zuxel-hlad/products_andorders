@@ -54,7 +54,7 @@ export interface ComingOrder {
 export interface DeletedItem {
     title: string;
     id: string | number;
-    parentId?: string | number;
+    parentId?: unknown;
     serialNumber?: number | string;
 }
 
@@ -62,5 +62,3 @@ export interface Filters {
     type: string;
     label: string;
 }
-
-
