@@ -61,7 +61,8 @@ const todayDate = computed((): string => {
         'Лист',
         'Груд',
     ];
-    const monthsOfWeek = $i18n.locale === 'ua' ? monthsOfWeekUA : monthsOfWeekEN;
+    const monthsOfWeek = $i18n.locale.value === 'ua' ? monthsOfWeekUA : monthsOfWeekEN;
+    console.log($i18n.locale);
     const date = new Date();
     const todayDate = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
     const dateString = `${todayDate} ${monthsOfWeek[date.getMonth()]}, ${date.getFullYear()}`;
